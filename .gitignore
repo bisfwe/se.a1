@@ -12,6 +12,7 @@
 bin/
 gen/
 out/
+.gradle/
 
 
 # Local configuration file (sdk path, etc)

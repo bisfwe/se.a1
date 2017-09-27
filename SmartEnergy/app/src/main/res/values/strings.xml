@@ -8,6 +8,21 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
+    <string name="pref_header_transport">Modes of Transport</string>
+    <string name="pref_transport_plane">Airplane</string>
+    <string name="pref_transport_sum_plane">"Check if you're planes regularly"</string>
+
+    <string name="pref_transport_train">Train</string>
+    <string name="pref_transport_sum_train">"Check if you're using trains regularly"</string>
+
+    <string name="pref_transport_car">Car</string>
+    <string name="pref_transport_sum_car">"Check if you're using a car regularly"</string>
+
+    <string name="pref_transport_tram">Tram</string>
+    <string name="pref_transport_sum_tram">"Check if you're using trams regularly"</string>
+
+    <string name="pref_transport_bicycle">Bicycle</string>
+    <string name="pref_transport_sum_bicycle">"Check if you're using a bike regularly"</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
