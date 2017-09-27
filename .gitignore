@@ -50,3 +50,11 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+
+*.bin
+
+*.lock
+
+*.bin
+
+*.lock
