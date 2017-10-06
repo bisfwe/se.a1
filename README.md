@@ -6,4 +6,4 @@ Android sample project "Activity Recognition": https://github.com/googlesamples/
 
 Ideas for App:
 - detect elevator usage (instead of taking the stairs) by using accelerometer in z-direction.
-- use https://transport.opendata.ch/docs.html to make better differentiations between tram/bus/car usage.
+- use https://transport.opendata.ch/docs.html or/and https://data.stadt-zuerich.ch/dataset/vbz_fahrplandaten_gtfs to make better differentiations between tram/bus/car usage.
