@@ -46,6 +46,9 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
 
@@ -476,5 +479,10 @@ public class MainActivity extends AppCompatActivity
         if (s.equals(Constants.KEY_DETECTED_ACTIVITIES)) {
             updateDetectedActivitiesList();
         }
+    }
+
+    public void showGraphView(View view){
+        Intent intent = new Intent(this, GraphActivity.class);
+        startActivity(intent);
     }
 }
