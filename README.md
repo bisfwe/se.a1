@@ -3,6 +3,14 @@ Smart Energy Project 1
 
 Android sample project "Activity Recognition": https://github.com/googlesamples/android-play-location/tree/master/ActivityRecognition
 
+Aufteilung:
+- GPS/Zeit/Wahrscheinlichkeitsverteilung tracken und speichern (Andres)
+- Algo. zur Einteilung (Zeit, Distanz, usw.)
+- Umrechnen in CO2-Verbreich
+- GUI (Simon)
+- Einstellungen (mit Tutorial am Anfang, Essverhalten, Wagentyp, usw.) (Raphael)
+- Logo
+- Umrechnungsfaktoren mit Quellen sammeln usw. (Daniel)
 
 Ideas for App:
 - detect elevator usage (instead of taking the stairs) by using accelerometer in z-direction.
