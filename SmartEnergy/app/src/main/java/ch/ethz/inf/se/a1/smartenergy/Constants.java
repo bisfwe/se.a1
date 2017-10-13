@@ -25,6 +25,8 @@ final class Constants {
 
     private Constants() {}
 
+    static final String UPDATE_STORE_TAG = "UPDATE_STORE_TAG";
+
     private static final String PACKAGE_NAME =
             "com.google.android.gms.location.activityrecognition";
 
@@ -38,7 +40,7 @@ final class Constants {
      * detections while improving battery life. A value of 0 results in activity detections at the
      * fastest possible rate.
      */
-    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 30 * 1000; // 30 seconds
+    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 0; // as fast as possible, since we only need one per location
     /**
      * List of DetectedActivity types that we monitor in this sample.
      */

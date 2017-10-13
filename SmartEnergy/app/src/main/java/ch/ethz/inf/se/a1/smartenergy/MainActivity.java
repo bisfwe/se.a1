@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -30,28 +29,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStates;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity
@@ -79,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     private FusedLocationProviderClient mFusedLocationClient;
     private Location mCurrentLocation;
     private LocationSettingsStates mLocationSettingsStates;
+    private UpdateService mUpdateService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         setButtonsEnabledState();
 
         ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
-                PreferenceManager.getDefaultSharedPreferences(this).getString(
+                getDefaultSharedPreferences(this).getString(
                         Constants.KEY_DETECTED_ACTIVITIES, ""));
 
         // Bind the adapter to the ListView responsible for display data for detected activities.
@@ -113,7 +102,7 @@ public class MainActivity extends AppCompatActivity
 
         mActivityRecognitionClient = new ActivityRecognitionClient(this);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = getDefaultSharedPreferences(this);
         boolean prefAirplane = sharedPref.getBoolean(SettingsActivity.KEY_AIRPLANE, false);
         boolean prefTrain = sharedPref.getBoolean(SettingsActivity.KEY_TRAIN, false);
         boolean prefTram = sharedPref.getBoolean(SettingsActivity.KEY_TRAM, false);
@@ -150,16 +139,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                updateLastLocation();
 
-                double latitude = 0.0;
-                double longitude = 0.0;
-                if (mCurrentLocation != null) {
-                    latitude = mCurrentLocation.getLatitude();
-                    longitude = mCurrentLocation.getLongitude();
-                }
-
-                Snackbar.make(view, "Last location: " + latitude + " " + longitude, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Do we still need this button? ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -173,12 +154,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        createLocationRequest();
+        //start the location/time/activity updates in the background
+        //very important, otherwise we have no data to show
+        startService(new Intent(this, UpdateService.class));
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
     }
 
+    //method that asks the user for permission to turn on location
+    //has to be checked everytime the app is created
     public void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -190,41 +174,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void updateLastLocation() {
-
-        checkPermission();
-        mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            Context context = getApplicationContext();
-                            CharSequence text = "Location updated!";
-                            int duration = Toast.LENGTH_SHORT;
-
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            mCurrentLocation = location;
-                        }
-                    }
-                });
-        return;
-
-
-
-    }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        PreferenceManager.getDefaultSharedPreferences(this)
+        getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
         updateDetectedActivitiesList();
 
-        //checkPermission();
-        createLocationRequest();
     }
 
     @Override
@@ -239,7 +197,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onPause() {
-        PreferenceManager.getDefaultSharedPreferences(this)
+        getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
     }
@@ -296,54 +254,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    protected void createLocationRequest() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(mLocationRequest);
-
-        SettingsClient client = LocationServices.getSettingsClient(this);
-        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-
-        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                // All location settings are satisfied. The client can initialize
-                // location requests here.
-                // ...
-                mLocationSettingsStates = locationSettingsResponse.getLocationSettingsStates();
-
-            }
-        });
-
-        task.addOnFailureListener(this, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                int statusCode = ((ApiException) e).getStatusCode();
-                switch (statusCode) {
-                    case CommonStatusCodes.RESOLUTION_REQUIRED:
-                        // Location settings are not satisfied, but this can be fixed
-                        // by showing the user a dialog.
-                        try {
-                            // Show the dialog by calling startResolutionForResult(),
-                            // and check the result in onActivityResult().
-                            ResolvableApiException resolvable = (ResolvableApiException) e;
-                            resolvable.startResolutionForResult(MainActivity.this, 1);
-                        } catch (IntentSender.SendIntentException sendEx) {
-                            // Ignore the error.
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        // Location settings are not satisfied. However, we have no way
-                        // to fix the settings so we won't show the dialog.
-                        break;
-                }
-            }
-        });
-    }
 
 
     /**
@@ -445,7 +355,7 @@ public class MainActivity extends AppCompatActivity
      * updates.
      */
     private boolean getUpdatesRequestedState() {
-        return PreferenceManager.getDefaultSharedPreferences(this)
+        return getDefaultSharedPreferences(this)
                 .getBoolean(Constants.KEY_ACTIVITY_UPDATES_REQUESTED, false);
     }
 
@@ -454,7 +364,7 @@ public class MainActivity extends AppCompatActivity
      * updates.
      */
     private void setUpdatesRequestedState(boolean requesting) {
-        PreferenceManager.getDefaultSharedPreferences(this)
+        getDefaultSharedPreferences(this)
                 .edit()
                 .putBoolean(Constants.KEY_ACTIVITY_UPDATES_REQUESTED, requesting)
                 .apply();
@@ -467,6 +377,11 @@ public class MainActivity extends AppCompatActivity
      * activities.
      */
     protected void updateDetectedActivitiesList() {
+        String requestedActivities = PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getString(Constants.KEY_DETECTED_ACTIVITIES, "");
+
+        Log.e(TAG, "Requested Activities " + requestedActivities);
+
         ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
                 PreferenceManager.getDefaultSharedPreferences(mContext)
                         .getString(Constants.KEY_DETECTED_ACTIVITIES, ""));

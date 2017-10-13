@@ -30,6 +30,10 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
 
+        <service
+            android:name=".UpdateService" android:process=":my_service"
+            android:exported="false" />
+
         <!--
         Service that provides activity recognition data. Setting the android:exported attribute
         to "false" stops other apps from starting this service, even when using an explicit
