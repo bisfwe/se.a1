@@ -38,6 +38,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity
     private Location mCurrentLocation;
     private LocationSettingsStates mLocationSettingsStates;
     private UpdateService mUpdateService;
+
+    private ArrayList<Day> days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +143,16 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
+                //TODO: place this somewhere better and update frequently
+                allUpdatesToDays();
+                for (Day d : days) {
+                    Toast.makeText(mContext,
+                            String.format ("Total Co2 on this day: %f", d.getTotalCo2()),
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
 
-                Snackbar.make(view, "Do we still need this button? ", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Populating days... ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -153,6 +165,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //only do that if you really want to delete all data!!!
+        //UpdateService.destroyWholeUpdateList(mContext);
 
         //start the location/time/activity updates in the background
         //very important, otherwise we have no data to show
@@ -399,5 +414,41 @@ public class MainActivity extends AppCompatActivity
     public void showGraphView(View view){
         Intent intent = new Intent(this, GraphActivity.class);
         startActivity(intent);
+    }
+
+    //populates the local object days with all recorded updates ever
+    private void allUpdatesToDays() {
+        days = new ArrayList<Day>();
+
+        ArrayList<Update> allUpdatesEver = UpdateService.loadAllUpdates(mContext);
+
+        //process all updates, day by day
+        ArrayList <Update> currentDayUpdates = new ArrayList<Update>();
+        Calendar currentDate = null;
+        for (Update u : allUpdatesEver) {
+            if (currentDate == null) {
+                currentDate = Calendar.getInstance();
+                currentDate.setTime(new Date(u.getTime()));
+            }
+            Calendar updateDate = Calendar.getInstance();
+            updateDate.setTime(new Date(u.getTime()));
+
+            if (    currentDate.get(Calendar.YEAR) == updateDate.get(Calendar.YEAR) &&
+                    currentDate.get(Calendar.MONTH) == updateDate.get(Calendar.MONTH) &&
+                    currentDate.get(Calendar.DAY_OF_MONTH) == updateDate.get(Calendar.DAY_OF_MONTH)
+                    ) {
+                currentDayUpdates.add(u);
+
+            }
+            else {
+                days.add(new Day(currentDayUpdates));
+                currentDayUpdates = new ArrayList<Update>();
+                currentDayUpdates.add(u);
+                currentDate = updateDate;
+
+            }
+        }
+
+        days.add(new Day(currentDayUpdates));
     }
 }

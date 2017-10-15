@@ -61,12 +61,13 @@ public class UpdateService extends Service
         public void onLocationChanged(final Location location)
         {
             Log.e(TAG, "onLocationChanged: " + location);
-            mLastLocation.set(location);
+
 
             final Date currentTime = Calendar.getInstance().getTime();
-
             Log.e(TAG, "currentTime: " + currentTime);
 
+
+            //TODO: somehow these activities always return STILL with 100% confidence
             Task<Void> task = mActivityRecognitionClient.requestActivityUpdates(
                     Constants.DETECTION_INTERVAL_IN_MILLISECONDS,
                     getActivityDetectionPendingIntent());
@@ -80,7 +81,9 @@ public class UpdateService extends Service
 
                     Log.e(TAG, "Activities: " + detectedActivities);
 
-                    saveNewUpdate(new Update(currentTime, location, detectedActivities));
+                    mLastLocation.set(location);
+
+                    saveNewUpdate(new Update(currentTime, location, detectedActivities), mContext);
 
                 }
             });
@@ -92,7 +95,6 @@ public class UpdateService extends Service
                 }
             });
 
-            //TODO: save such that it can be retrieved everywhere
         }
 
         @Override
@@ -199,15 +201,15 @@ public class UpdateService extends Service
     //save the new Update to the shared preferences
     //can be retrieved from any activity with the correct tag
     //read out the string with gson
-    private void saveNewUpdate(Update u) {
+    private static void saveNewUpdate(Update u, Context c) {
         //load previous updates
-        ArrayList<Update> updateList = loadAllUpdates();
+        ArrayList<Update> updateList = loadAllUpdates(c);
         //add new update to the list
         updateList.add(u);
 
         Log.e(TAG, "UpdateList now looks like:  " + updateList);
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
         //convert the list to a json
@@ -223,8 +225,8 @@ public class UpdateService extends Service
     //you can use this to get updates in other activities
     //just use it like:
     // ArrayList<Update> previousStoredUpdates = UpdateService.loadAllUpdates();
-    public ArrayList<Update> loadAllUpdates(){
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+    public static ArrayList<Update> loadAllUpdates(Context c){
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
         Gson gson = new Gson();
         String json = sharedPrefs.getString(Constants.UPDATE_STORE_TAG, null);
         if (json == null || json == "") {
@@ -240,4 +242,31 @@ public class UpdateService extends Service
         }
 
     }
+
+    //ATTENTION: do not use this method in final release
+    //just for debugging if you change the implementation of Update and can't read out the old Update objects
+    /*
+    public static void destroyWholeUpdateList(Context c) {
+
+        //override with empty list
+        ArrayList<Update> updateList = new ArrayList<Update>();
+        Log.e(TAG, "UpdateList now looks like:  " + updateList);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+
+        //convert the list to a json
+        Gson gson = new Gson();
+        String json = gson.toJson(updateList);
+
+        //save it forever
+        editor.putString(Constants.UPDATE_STORE_TAG, json);
+        editor.commit();
+
+    }
+    */
+
+
+
+
 }
