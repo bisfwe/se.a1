@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -39,6 +40,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static String KEY_TRAM = "pref_tram";
     public static String KEY_CAR = "pref_car";
     public static String KEY_BICYCLE = "pref_bicycle";
+
+
+    public static final int LIFESTYLE_MEET_LOVER = 1;
+    public static final int LIFESTYLE_AVERAGE = 2;
+    public static final int LIFESTYLE_NO_BEEF = 3;
+    public static final int LIFESTYLE_VEGETARIAN = 4;
+    public static final int LIFESTYLE_VEGAN = 5;
+    public int LIFESTYLE_DIET_TYPE_DEFAULT = 2; //Integer.parseInt(getString(R.string.preference_diet_type_values_default));
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -174,7 +184,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName);
+                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
+                || NotificationPreferenceFragment.class.getName().equals(fragmentName)
+                || DataSyncPreferenceFragment.class.getName().equals(fragmentName);
     }
 
     /**
@@ -198,6 +210,26 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 return true;
             }
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class NotificationPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_notification);
+            setHasOptionsMenu(false);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class DataSyncPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_data_sync);
+            setHasOptionsMenu(false);
         }
     }
 }

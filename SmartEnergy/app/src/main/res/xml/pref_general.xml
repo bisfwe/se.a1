@@ -34,4 +34,24 @@
             android:summary="@string/pref_transport_sum_bicycle"
             android:defaultValue="true" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_home"
+        android:key="pref_key_home_settings">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_lifestyle"
+        android:key="pref_key_lifestyle_settings">
+
+        <ListPreference
+            android:key="@string/pref_key_diet_type"
+            android:title="@string/pref_title_diet_type"
+            android:defaultValue="@string/preference_diet_type_values_default"
+            android:entries="@array/preference_array_diet_type_entries"
+            android:entryValues="@array/preference_array_diet_type_values"
+            android:summary="@string/pref_summary_diet_type"/>
+
+    </PreferenceCategory>
 </PreferenceScreen>
