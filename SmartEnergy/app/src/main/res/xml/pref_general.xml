@@ -33,11 +33,36 @@
             android:title="@string/pref_transport_bicycle"
             android:summary="@string/pref_transport_sum_bicycle"
             android:defaultValue="true" />
+
+        <MultiSelectListPreference
+            android:key="@string/pref_key_used_transportation"
+            android:title="@string/pref_title_used_transportation"
+            android:entries="@array/preference_array_used_transportation_entries"
+            android:entryValues="@array/preference_array_used_transportation_values"
+            android:summary="@string/pref_summary_used_transportation"/>
+
+        <ListPreference
+            android:key="@string/pref_key_car_type"
+            android:title="@string/pref_title_car_type"
+            android:defaultValue="@string/preference_car_type_values_default"
+            android:entries="@array/preference_array_car_type_entries"
+            android:entryValues="@array/preference_array_car_type_values"
+            android:summary="@string/pref_summary_car_type"/>
+
+        <ListPreference
+            android:key="@string/pref_key_fuel_type"
+            android:title="@string/pref_title_fuel_type"
+            android:defaultValue="@string/preference_fuel_type_values_default"
+            android:entries="@array/preference_array_fuel_type_entries"
+            android:entryValues="@array/preference_array_fuel_type_values"
+            android:summary="@string/pref_summary_fuel_type"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/pref_header_home"
         android:key="pref_key_home_settings">
+
 
     </PreferenceCategory>
 

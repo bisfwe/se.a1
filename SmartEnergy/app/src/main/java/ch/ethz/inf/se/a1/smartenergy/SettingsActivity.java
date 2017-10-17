@@ -42,12 +42,21 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static String KEY_BICYCLE = "pref_bicycle";
 
 
+    public static final int TRANSPORTATION_SMALL_CAR = 1;
+    public static final int TRANSPORTATION_MEDIUM_CAR = 2;
+    public static final int TRANSPORTATION_BIG_CAR = 3;
+    public enum CarType {TRANSPORTATION_SMALL_CAR, TRANSPORTATION_MEDIUM_CAR, TRANSPORTATION_BIG_CAR}
+
+    public static final int TRANSPORTATION_PETROL = 1;
+    public static final int TRANSPORTATION_DIESEL = 2;
+    public enum FuelType {TRANSPORTATION_PETROL, TRANSPORTATION_DIESEL}
+
     public static final int LIFESTYLE_MEET_LOVER = 1;
     public static final int LIFESTYLE_AVERAGE = 2;
     public static final int LIFESTYLE_NO_BEEF = 3;
     public static final int LIFESTYLE_VEGETARIAN = 4;
     public static final int LIFESTYLE_VEGAN = 5;
-    public int LIFESTYLE_DIET_TYPE_DEFAULT = 2; //Integer.parseInt(getString(R.string.preference_diet_type_values_default));
+    public enum DietType {LIFESTYLE_MEET_LOVER, LIFESTYLE_AVERAGE, LIFESTYLE_NO_BEEF, LIFESTYLE_VEGETARIAN, LIFESTYLE_VEGAN}
 
     /**
      * A preference value change listener that updates the preference's summary
