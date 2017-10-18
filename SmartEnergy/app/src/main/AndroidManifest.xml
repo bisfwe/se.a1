@@ -29,6 +29,9 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
+        <activity
+            android:name="IntroActivity"
+            android:label="@string/title_activity_intro" />
 
         <service
             android:name=".UpdateService" android:process=":my_service"
