@@ -94,9 +94,6 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-        if (!canAccessLocation()) {
-            requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-        }
 
         ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
                 getDefaultSharedPreferences(this).getString(
@@ -167,6 +164,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+
+        if (!canAccessLocation()) {
+            requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
+        }
 
         getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
