@@ -49,6 +49,11 @@ public class MainActivity extends AppCompatActivity
                    SharedPreferences.OnSharedPreferenceChangeListener{
 
     protected static final String TAG = "MainActivity";
+    private static final String[] INITIAL_PERMS={
+            Manifest.permission.ACCESS_FINE_LOCATION,
+    };
+    private static final int INITIAL_REQUEST=1337;
+
 
     private Context mContext;
 
@@ -56,10 +61,6 @@ public class MainActivity extends AppCompatActivity
      * The entry point for interacting with activity recognition.
      */
     private ActivityRecognitionClient mActivityRecognitionClient;
-
-    // UI elements.
-    private Button mRequestActivityUpdatesButton;
-    private Button mRemoveActivityUpdatesButton;
 
     /**
      * Adapter backed by a list of DetectedActivity objects.
@@ -93,15 +94,9 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-        // Get the UI widgets.
-        mRequestActivityUpdatesButton = (Button) findViewById(R.id.request_activity_updates_button);
-        mRemoveActivityUpdatesButton = (Button) findViewById(R.id.remove_activity_updates_button);
-        ListView detectedActivitiesListView = (ListView) findViewById(
-                R.id.detected_activities_listview);
-
-        // Enable either the Request Updates button or the Remove Updates button depending on
-        // whether activity updates have been requested.
-        setButtonsEnabledState();
+        if (!canAccessLocation()) {
+            requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
+        }
 
         ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
                 getDefaultSharedPreferences(this).getString(
@@ -109,38 +104,8 @@ public class MainActivity extends AppCompatActivity
 
         // Bind the adapter to the ListView responsible for display data for detected activities.
         mAdapter = new DetectedActivitiesAdapter(this, detectedActivities);
-        detectedActivitiesListView.setAdapter(mAdapter);
 
         mActivityRecognitionClient = new ActivityRecognitionClient(this);
-
-        SharedPreferences sharedPref = getDefaultSharedPreferences(this);
-        boolean prefAirplane = sharedPref.getBoolean(SettingsActivity.KEY_AIRPLANE, false);
-        boolean prefTrain = sharedPref.getBoolean(SettingsActivity.KEY_TRAIN, false);
-        boolean prefTram = sharedPref.getBoolean(SettingsActivity.KEY_TRAM, false);
-        boolean prefBike = sharedPref.getBoolean(SettingsActivity.KEY_BICYCLE, false);
-        boolean prefCar = sharedPref.getBoolean(SettingsActivity.KEY_CAR, false);
-
-
-        Context context = getApplicationContext();
-        CharSequence toastText = "Your prefs: ";
-        int duration = Toast.LENGTH_LONG;
-        if (prefAirplane){
-            toastText = toastText + "airplane, ";
-        }
-        if (prefTrain){
-            toastText = toastText + "train, ";
-        }
-        if (prefCar){
-            toastText = toastText + "car, ";
-        }
-        if (prefTram){
-            toastText = toastText + "tram, ";
-        }
-        if (prefBike){
-            toastText = toastText + "bike, ";
-        }
-        Toast toast = Toast.makeText(context, toastText.subSequence(0,toastText.length()-2), duration);
-        toast.show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -178,8 +143,10 @@ public class MainActivity extends AppCompatActivity
 
         //start the location/time/activity updates in the background
         //very important, otherwise we have no data to show
-        startService(new Intent(this, UpdateService.class));
+        if (canAccessLocation()){
+            startService(new Intent(this, UpdateService.class));
 
+        }
 
     }
 
@@ -360,21 +327,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Ensures that only one button is enabled at any time. The Request Activity Updates button is
-     * enabled if the user hasn't yet requested activity updates. The Remove Activity Updates button
-     * is enabled if the user has requested activity updates.
-     */
-    private void setButtonsEnabledState() {
-        if (getUpdatesRequestedState()) {
-            mRequestActivityUpdatesButton.setEnabled(false);
-            mRemoveActivityUpdatesButton.setEnabled(true);
-        } else {
-            mRequestActivityUpdatesButton.setEnabled(true);
-            mRemoveActivityUpdatesButton.setEnabled(false);
-        }
-    }
-
-    /**
      * Retrieves the boolean from SharedPreferences that tracks whether we are requesting activity
      * updates.
      */
@@ -392,7 +344,6 @@ public class MainActivity extends AppCompatActivity
                 .edit()
                 .putBoolean(Constants.KEY_ACTIVITY_UPDATES_REQUESTED, requesting)
                 .apply();
-        setButtonsEnabledState();
     }
 
     /**
@@ -459,5 +410,25 @@ public class MainActivity extends AppCompatActivity
         }
 
         days.add(new Day(currentDayUpdates));
+    }
+
+    private boolean canAccessLocation() {
+        return(hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+    }
+
+    private boolean hasPermission(String perm) {
+        return(PackageManager.PERMISSION_GRANTED==ContextCompat.checkSelfPermission(MainActivity.this ,perm));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch(requestCode) {
+            case INITIAL_REQUEST:
+                if (canAccessLocation()) {
+
+                } else {
+                    // we are fucked, can't access loaction
+                }
+        }
     }
 }
