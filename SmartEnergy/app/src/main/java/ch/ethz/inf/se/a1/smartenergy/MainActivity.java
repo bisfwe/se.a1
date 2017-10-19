@@ -3,9 +3,11 @@ package ch.ethz.inf.se.a1.smartenergy;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -50,15 +52,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         mContext = this;
-        /*
         // Show intro the very first time the app is opened
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this); //getSharedPreferences("IntroPreferences", Context.MODE_PRIVATE);
         if (!pref.getBoolean("introDone", false)) {
             Intent intent = new Intent(this, IntroActivity.class);
             startActivityForResult(intent, 0);
         }
-
-        */
 
         //check location permissions right at the start
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
