@@ -18,13 +18,14 @@ package ch.ethz.inf.se.a1.smartenergy;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
 import java.util.ArrayList;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
  *  IntentService for handling incoming intents that are generated as a result of requesting
@@ -42,6 +43,14 @@ public class DetectedActivitiesIntentService extends IntentService {
     public DetectedActivitiesIntentService() {
         // Use the TAG to name the worker thread.
         super(TAG);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
+        Log.e(TAG, "onStartCommand");
+        super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Override
@@ -64,18 +73,18 @@ public class DetectedActivitiesIntentService extends IntentService {
         // 0 and 100.
         ArrayList<DetectedActivity> detectedActivities = (ArrayList) result.getProbableActivities();
 
-        PreferenceManager.getDefaultSharedPreferences(this)
+        getDefaultSharedPreferences(this)
                 .edit()
                 .putString(Constants.KEY_DETECTED_ACTIVITIES,
                         Utils.detectedActivitiesToJson(detectedActivities))
-                .apply();
+                .commit();
 
         // Log each activity.
         Log.i(TAG, "activities detected");
         for (DetectedActivity da: detectedActivities) {
             Log.i(TAG, Utils.getActivityString(
-                            getApplicationContext(),
-                            da.getType()) + " " + da.getConfidence() + "%"
+                    getApplicationContext(),
+                    da.getType()) + " " + da.getConfidence() + "%"
             );
         }
     }

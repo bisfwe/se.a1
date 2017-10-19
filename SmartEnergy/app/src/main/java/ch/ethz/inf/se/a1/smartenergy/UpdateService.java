@@ -13,7 +13,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -30,20 +29,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 public class UpdateService extends Service
 {
-    private Context mContext;
     private static final String TAG = "BOOMBOOMTESTGPS";
     private LocationManager mLocationManager = null;
     //minimum time in milliseconds
     private static final int LOCATION_INTERVAL = 1000;
     //minimum distance to upate in meters
     private static final float LOCATION_DISTANCE = 2;
-
     //object that can send newest activity probabilities
     private ActivityRecognitionClient mActivityRecognitionClient;
 
-    private ArrayList<DetectedActivity> detectedActivities;
 
     private class LocationListener implements android.location.LocationListener
     {
@@ -61,39 +59,9 @@ public class UpdateService extends Service
         public void onLocationChanged(final Location location)
         {
             Log.e(TAG, "onLocationChanged: " + location);
+            mLastLocation.set(location);
 
-
-            final Date currentTime = Calendar.getInstance().getTime();
-            Log.e(TAG, "currentTime: " + currentTime);
-
-
-            //TODO: somehow these activities always return STILL with 100% confidence
-            Task<Void> task = mActivityRecognitionClient.requestActivityUpdates(
-                    Constants.DETECTION_INTERVAL_IN_MILLISECONDS,
-                    getActivityDetectionPendingIntent());
-
-            task.addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void result) {
-                    detectedActivities = Utils.detectedActivitiesFromJson(
-                            PreferenceManager.getDefaultSharedPreferences(mContext)
-                                    .getString(Constants.KEY_DETECTED_ACTIVITIES, ""));
-
-                    Log.e(TAG, "Activities: " + detectedActivities);
-
-                    mLastLocation.set(location);
-
-                    saveNewUpdate(new Update(currentTime, location, detectedActivities), mContext);
-
-                }
-            });
-
-            task.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w(TAG, getString(R.string.activity_updates_not_enabled));
-                }
-            });
+            storeUpdateWithLocation(location);
 
         }
 
@@ -139,7 +107,6 @@ public class UpdateService extends Service
     public void onCreate()
     {
         Log.e(TAG, "onCreate");
-        mContext = this;
         initializeLocationManager();
         try {
             mLocationManager.requestLocationUpdates(
@@ -162,6 +129,22 @@ public class UpdateService extends Service
 
         //creating new activity client that will send activity probabilities after a new location is found
         mActivityRecognitionClient = new ActivityRecognitionClient(this);
+
+        Task<Void> task = mActivityRecognitionClient.requestActivityUpdates(Constants.DETECTION_INTERVAL_IN_MILLISECONDS, getActivityDetectionPendingIntent());
+
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+        @Override
+        public void onSuccess(Void result) {
+            Log.w(TAG, getString(R.string.activity_updates_enabled));
+        }});
+
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, getString(R.string.activity_updates_not_enabled));
+            }
+        });
+
     }
 
     @Override
@@ -209,7 +192,7 @@ public class UpdateService extends Service
 
         Log.e(TAG, "UpdateList now looks like:  " + updateList);
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences sharedPrefs = getDefaultSharedPreferences(c);
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
         //convert the list to a json
@@ -226,7 +209,7 @@ public class UpdateService extends Service
     //just use it like:
     // ArrayList<Update> previousStoredUpdates = UpdateService.loadAllUpdates();
     public static ArrayList<Update> loadAllUpdates(Context c){
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences sharedPrefs = getDefaultSharedPreferences(c);
         Gson gson = new Gson();
         String json = sharedPrefs.getString(Constants.UPDATE_STORE_TAG, null);
         if (json == null || json == "") {
@@ -240,6 +223,23 @@ public class UpdateService extends Service
             return gson.fromJson(json, type);
 
         }
+
+    }
+
+    public void storeUpdateWithLocation(Location location) {
+
+        final Date currentTime = Calendar.getInstance().getTime();
+        Log.e(TAG, "currentTime: " + currentTime);
+
+        //TODO: somehow these activities always return STILL with 100% confidence
+        ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
+                getDefaultSharedPreferences(getApplicationContext())
+                        .getString(Constants.KEY_DETECTED_ACTIVITIES, ""));
+
+        Log.e(TAG, "Activities: " + detectedActivities);
+
+        saveNewUpdate(new Update(currentTime, location, detectedActivities), this);
+
 
     }
 
