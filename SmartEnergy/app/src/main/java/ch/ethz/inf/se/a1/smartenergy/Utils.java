@@ -57,4 +57,25 @@ public class Utils {
         }
         return detectedActivities;
     }
+
+    static double meatLoverWalking = 29.91984799;
+    static double meatLoverCycling = 74.79961998;
+    static double meatloverRunning = 99.30920419;
+
+    static double averageWalking = 22.66655151;
+    static double averageCycling = 56.66637877;
+    static double averageRunning = 75.2342456;
+
+    static double noBeefWalking = 17.22657915;
+    static double noBeefCycling = 43.06644787;
+    static double noBeefRunning = 57.17802666;
+
+    static double vegetarianWalking = 15.41325503;
+    static double vegetarianCycling = 38.53313756;
+    static double vegetarianRunning = 51.15928701;
+
+    static double veganWalking = 13.59993091;
+    static double veganCycling = 33.99982726;
+    static double veganRunning = 45.14054736;
+
 }

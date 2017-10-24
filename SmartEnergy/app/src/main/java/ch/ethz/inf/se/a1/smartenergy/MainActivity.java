@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity
 
             }
             else {
-                days.add(new Day(currentDayUpdates));
+                days.add(new Day(currentDayUpdates, this));
                 currentDayUpdates = new ArrayList<Update>();
                 currentDayUpdates.add(u);
                 currentDate = updateDate;
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        days.add(new Day(currentDayUpdates));
+        days.add(new Day(currentDayUpdates, this));
     }
 
     private boolean canAccessLocation() {

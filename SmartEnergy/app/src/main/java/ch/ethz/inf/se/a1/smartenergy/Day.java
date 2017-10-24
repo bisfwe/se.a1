@@ -4,6 +4,7 @@ package ch.ethz.inf.se.a1.smartenergy;
  * Created by Andres on 15.10.17.
  */
 
+import android.content.Context;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class Day {
     public ArrayList<Aktivitaet> aktivitaetenList;
 
     //initialize Day with a list of updates that have to be all on the same day
-    public Day(ArrayList<Update> updates) {
+    public Day(ArrayList<Update> updates, Context context) {
 
         //sort the updates in ascending time
         Collections.sort(updates);
@@ -52,7 +53,7 @@ public class Day {
                             continue;
                         }
                     }
-                    aktivitaetenList.add(new Aktivitaet(startOfActivity, currentUpdate));
+                    aktivitaetenList.add(new Aktivitaet(startOfActivity, currentUpdate, context));
                 }
             }
         }
