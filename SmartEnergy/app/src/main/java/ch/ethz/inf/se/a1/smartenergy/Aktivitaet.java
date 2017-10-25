@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.android.gms.location.DetectedActivity;
+
 /**
  * Created by Andres on 15.10.17.
  */
@@ -32,21 +34,21 @@ public class Aktivitaet {
     private double calculateCo2() {
         double result = 0.0;
         switch (detectedActivityType){
-            case 0: return co2Vehicle();
+            case DetectedActivity.IN_VEHICLE: return co2Vehicle();
 
-            case 1: return co2Bicycle();
+            case DetectedActivity.ON_BICYCLE: return co2Bicycle();
 
             // Still isn't producing co2..
-            case 3: return 0.0;
+            case DetectedActivity.STILL: return 0.0;
 
-            case 7: return co2Walking();
+            case DetectedActivity.WALKING: return co2Walking();
 
-            case 8: return co2Running();
+            case DetectedActivity.RUNNING: return co2Running();
 
             // Tilting isn't producing co2..
-            case 5: return  0.0;
+            case DetectedActivity.TILTING: return  0.0;
 
-            case 2: return co2Walking();
+            case DetectedActivity.ON_FOOT: return co2Walking();
 
             default: return 0.0;
         }

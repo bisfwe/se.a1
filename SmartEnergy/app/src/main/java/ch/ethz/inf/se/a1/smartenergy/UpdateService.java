@@ -226,6 +226,30 @@ public class UpdateService extends Service
 
     }
 
+    public static ArrayList<Update> loadDaysUpdates(Calendar date, Context c){
+        ArrayList<Update> result = new ArrayList<Update>();
+        ArrayList<Update> allUpdates = loadAllUpdates(c);
+        Calendar dayStart = date;
+        // create date.00.00.00
+        dayStart.set(Calendar.MILLISECOND, 0);
+        dayStart.set(Calendar.SECOND, 0);
+        dayStart.set(Calendar.MINUTE, 0);
+        dayStart.set(Calendar.HOUR, 0);
+        // create date.23.59.59
+        Calendar dayEnd = date;
+        dayStart.set(Calendar.MILLISECOND, 0);
+        dayStart.set(Calendar.SECOND, 59);
+        dayStart.set(Calendar.MINUTE, 59);
+        dayStart.set(Calendar.HOUR, 23);
+
+        for (Update u: allUpdates) {
+            if (u.getTime() >= dayStart.getTimeInMillis() && u.getTime() <= dayEnd.getTimeInMillis()){
+                result.add(u);
+            }
+        }
+        return result;
+    }
+
     public void storeUpdateWithLocation(Location location) {
 
         final Date currentTime = Calendar.getInstance().getTime();

@@ -9,9 +9,11 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -24,23 +26,18 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-
         mListView = (ListView) findViewById(R.id.stats_list_view);
-        final ArrayList<Day> dayList = new ArrayList<Day>();
-
+        ArrayList<Day> dayList = new ArrayList<Day>();
 
         String[] listItems = new String[7];
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
         for (int i = 0; i < 7; i++){
             today.add(Calendar.DATE, -1);
-            listItems[i] = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(today.getTime());
+            ArrayList<Update> updates = UpdateService.loadDaysUpdates(today, this);
+            Day currentDay = new Day(updates, this);
+            dayList.add(currentDay);
         }
-
-//        for(int i = 0; i < dayList.size(); i++){
-//            Day day = dayList.get(i);
-//            listItems[i] = day.date.toString();
-//        }
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
         mListView.setAdapter(adapter);
