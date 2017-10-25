@@ -21,13 +21,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -41,9 +46,8 @@ public class MainActivity extends AppCompatActivity
     };
     private static final int INITIAL_REQUEST=1337;
 
-
     private Context mContext;
-
+    private ListView mListView;
 
     private ArrayList<Day> days;
 
@@ -66,11 +70,9 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-
         ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
                 getDefaultSharedPreferences(this).getString(
                         Constants.KEY_DETECTED_ACTIVITIES, ""));
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,6 +96,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        // ListView displaying stats
+
+        mListView = (ListView) findViewById(R.id.stats_list_view);
+
+        allUpdatesToDays();
+        DayAdapter adapter = new DayAdapter(this, days);
+        mListView.setAdapter(adapter);
+
+        // Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -190,6 +201,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            // got to list view
+            Intent intent = new Intent(this, GraphActivity.class);
+            String message = "Graph activity";
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -276,5 +292,12 @@ public class MainActivity extends AppCompatActivity
                     // we are fucked, can't access loaction
                 }
         }
+    }
+
+    // Creates dummy data
+    public ArrayList<Day> createDummyData(){
+        ArrayList<Day> result = new ArrayList<Day>();
+        return result;
+
     }
 }

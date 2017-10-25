@@ -17,6 +17,12 @@ public class Aktivitaet {
     private static float metersTravelled;
     private int detectedActivityType;
     private double co2produced;
+    // co2 produced by running, walking..
+    private double greenCo2;
+    // co2 produced by car, plane
+    private double redCo2;
+    // co2 produced by public transport, these are displayed in a graph in the list view. not implemented yet..
+    private double yellowCo2;
     private Context context;
 
     //first Update has to be recorded before second Update
@@ -55,64 +61,75 @@ public class Aktivitaet {
     }
 
     private double co2Vehicle(){
+        double result = 0.0;
         // TODO distinguish between different modes of transportation...
         // TODO calculate
+        redCo2 += result;
         return 0.0;
     }
 
     private double co2Bicycle(){
+        double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int lifestyle = pref.getInt("pref_lifestyle", 2);
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEET_LOVER:
-                return Utils.meatLoverCycling/1000 * metersTravelled;
+                result += Utils.meatLoverCycling/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_AVERAGE:
-                return Utils.averageCycling/1000 * metersTravelled;
+                result += Utils.averageCycling/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_NO_BEEF:
-                return Utils.noBeefCycling/1000 * metersTravelled;
+                result += Utils.noBeefCycling/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_VEGAN:
-                return Utils.veganCycling/1000 * metersTravelled;
+                result += Utils.veganCycling/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_VEGETARIAN:
-                return Utils.vegetarianCycling/1000 * metersTravelled;
+                result += Utils.vegetarianCycling/1000 * metersTravelled;
             default:
-                return Utils.averageCycling/1000 * metersTravelled;
+                result += Utils.averageCycling/1000 * metersTravelled;
         }
+        greenCo2 += result;
+        return result;
     }
     private double co2Walking(){
+        double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int lifestyle = pref.getInt("pref_lifestyle", 2);
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEET_LOVER:
-                return Utils.meatLoverWalking/1000 * metersTravelled;
+                result += Utils.meatLoverWalking/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_AVERAGE:
-                return Utils.averageWalking/1000 * metersTravelled;
+                result += Utils.averageWalking/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_NO_BEEF:
-                return Utils.noBeefWalking/1000 * metersTravelled;
+                result += Utils.noBeefWalking/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_VEGAN:
-                return Utils.veganWalking/1000 * metersTravelled;
+                result += Utils.veganWalking/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_VEGETARIAN:
-                return Utils.vegetarianWalking/1000 * metersTravelled;
+                result += Utils.vegetarianWalking/1000 * metersTravelled;
             default:
-                return Utils.averageWalking/1000 * metersTravelled;
+                result += Utils.averageWalking/1000 * metersTravelled;
         }
+        greenCo2 += result;
+        return result;
     }
     private double co2Running(){
+        double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int lifestyle = pref.getInt("pref_lifestyle", 2);
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEET_LOVER:
-                return Utils.meatloverRunning/1000 * metersTravelled;
+                result += Utils.meatloverRunning/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_AVERAGE:
-                return Utils.averageRunning/1000 * metersTravelled;
+                result += Utils.averageRunning/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_NO_BEEF:
-                return Utils.noBeefRunning/1000 * metersTravelled;
+                result += Utils.noBeefRunning/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_VEGAN:
-                return Utils.veganRunning/1000 * metersTravelled;
+                result += Utils.veganRunning/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_VEGETARIAN:
-                return Utils.vegetarianRunning/1000 * metersTravelled;
+                result += Utils.vegetarianRunning/1000 * metersTravelled;
             default:
-                return Utils.averageRunning/1000 * metersTravelled;
+                result += Utils.averageRunning/1000 * metersTravelled;
         }
+        greenCo2 += result;
+        return result;
     }
 
     public long getDurationSeconds() {

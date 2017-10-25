@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -43,6 +45,17 @@ public class DayAdapter extends BaseAdapter {
         // Get view for row item
         View rowView = mInflater.inflate(R.layout.stats_item_day, parent, false);
 
+        // Get title element
+        TextView titleTextView = (TextView) rowView.findViewById(R.id.day_list_title);
+
+        // Get subtitle element
+        TextView subtitleTextView = (TextView) rowView.findViewById(R.id.day_list_subtitle);
+
+        Day day = (Day) getItem(position);
+        String dayString = android.text.format.DateFormat.format("EEEE", day.date).toString();
+
+        titleTextView.setText(dayString);
+        subtitleTextView.setText("Total amount of CO2: " + day.getTotalCo2());
         return rowView;
     }
 

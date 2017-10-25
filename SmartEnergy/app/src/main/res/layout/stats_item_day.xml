@@ -5,18 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/recipe_list_detail"
+        android:id="@+id/day_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="2dp"
-        android:maxLines="1"
-        android:paddingEnd="4dp"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        tools:text="Detail"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        tools:text="Title"
         />
+
+    <TextView
+        android:id="@+id/day_list_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/day_list_title"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="16sp"
+        tools:text="Subtitle"
+        />
+
 
 </RelativeLayout>
