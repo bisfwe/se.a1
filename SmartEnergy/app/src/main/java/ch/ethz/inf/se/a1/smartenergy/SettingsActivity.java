@@ -269,10 +269,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     Log.d(TAG, "values: " + ((MultiSelectListPreference) preference).getValues().toString());
 
                     if (newValue.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
-                        carType.setEnabled(true);
                         fuelType.setEnabled(true);
                         knowsUsage.setEnabled(true);
-                        usage.setEnabled(true);
+                        if (knowsUsage.isChecked()) {
+                            usage.setEnabled(true);
+                        } else {
+                            carType.setEnabled(true);
+                        }
                     } else {
                         carType.setEnabled(false);
                         fuelType.setEnabled(false);
