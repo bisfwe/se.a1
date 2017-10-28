@@ -5,20 +5,23 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -35,39 +38,49 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
-    public static String KEY_AIRPLANE = "pref_plane";
-    public static String KEY_TRAIN = "pref_train";
-    public static String KEY_TRAM = "pref_tram";
-    public static String KEY_CAR = "pref_car";
-    public static String KEY_BICYCLE = "pref_bicycle";
+    public static final String TAG = "SettingsActivity";
 
+    public static final int TRANSPORTATION_AIRPLAN = 1;
+    public static final int TRANPORTATION_TRAIN = 2;
+    public static final int TRANSPORTATION_CAR = 3;
+    public static final int TRANSPORTATION_TRAM = 4;
+    public static final int TRANSPORTATION_BICYCLE = 5;
 
     public static final int TRANSPORTATION_SMALL_CAR = 1;
     public static final int TRANSPORTATION_MEDIUM_CAR = 2;
     public static final int TRANSPORTATION_BIG_CAR = 3;
-    public enum CarType {TRANSPORTATION_SMALL_CAR, TRANSPORTATION_MEDIUM_CAR, TRANSPORTATION_BIG_CAR}
 
     public static final int TRANSPORTATION_PETROL = 1;
     public static final int TRANSPORTATION_DIESEL = 2;
-    public enum FuelType {TRANSPORTATION_PETROL, TRANSPORTATION_DIESEL}
 
     public static final int LIFESTYLE_MEET_LOVER = 1;
     public static final int LIFESTYLE_AVERAGE = 2;
     public static final int LIFESTYLE_NO_BEEF = 3;
     public static final int LIFESTYLE_VEGETARIAN = 4;
     public static final int LIFESTYLE_VEGAN = 5;
+
+
+    private static MultiSelectListPreference usedTransportation;
+    private static ListPreference carType, fuelType;
+    private static CheckBoxPreference knowsUsage;
+    private static EditTextPreference usage;
+
+
+    public enum CarType {TRANSPORTATION_SMALL_CAR, TRANSPORTATION_MEDIUM_CAR, TRANSPORTATION_BIG_CAR}
+
+    public enum FuelType {TRANSPORTATION_PETROL, TRANSPORTATION_DIESEL}
+
     public enum DietType {LIFESTYLE_MEET_LOVER, LIFESTYLE_AVERAGE, LIFESTYLE_NO_BEEF, LIFESTYLE_VEGETARIAN, LIFESTYLE_VEGAN}
 
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
-
-
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
+
 
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
@@ -146,6 +159,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+
     }
 
     /**
@@ -198,6 +212,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName);
     }
 
+
     /**
      * This fragment shows general preferences only. It is used when the
      * activity is showing a two-pane settings UI.
@@ -209,6 +224,64 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
+
+            usedTransportation = (MultiSelectListPreference) findPreference(getString(R.string.pref_key_used_transportation));
+            carType = (ListPreference) findPreference(getString(R.string.pref_key_car_type));
+            fuelType = (ListPreference) findPreference(getString(R.string.pref_key_fuel_type));
+            knowsUsage = (CheckBoxPreference) findPreference(getString(R.string.pref_key_knows_usage));
+            usage = (EditTextPreference) findPreference((getString(R.string.pref_key_usage)));
+
+            if (usedTransportation.getValues().contains(Integer.toString(TRANSPORTATION_CAR))) {
+                carType.setEnabled(true);
+                fuelType.setEnabled(true);
+                knowsUsage.setEnabled(true);
+                usage.setEnabled(true);
+            } else {
+                carType.setEnabled(false);
+                fuelType.setEnabled(false);
+                knowsUsage.setEnabled(false);
+                usage.setEnabled(false);
+            }
+
+            if (knowsUsage.isChecked()){
+                carType.setEnabled(false);
+            } else {
+                usage.setEnabled(false);
+            }
+
+            knowsUsage.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Log.d(TAG, "values: " + newValue);
+
+                    if (Boolean.valueOf(newValue.toString())) {
+                        carType.setEnabled(false);
+                        usage.setEnabled(true);
+                    } else {
+                        carType.setEnabled(true);
+                        usage.setEnabled(false);
+                    }
+                    return true;
+                }
+            });
+
+            usedTransportation.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Log.d(TAG, "values: " + ((MultiSelectListPreference) preference).getValues().toString());
+
+                    if (newValue.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
+                        carType.setEnabled(true);
+                        fuelType.setEnabled(true);
+                        knowsUsage.setEnabled(true);
+                        usage.setEnabled(true);
+                    } else {
+                        carType.setEnabled(false);
+                        fuelType.setEnabled(false);
+                        knowsUsage.setEnabled(false);
+                        usage.setEnabled(false);
+                    }
+                    return true;
+                }
+            });
         }
 
         @Override

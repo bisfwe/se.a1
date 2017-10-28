@@ -47,6 +47,9 @@
         <item>5</item>
     </string-array>
 
+    <string name="pref_key_usage">pref_key_usage</string>
+    <string name="pref_title_usage">Car Fuel Usage</string>
+    <string name="pref_summary_usage">How many [l/100km] my care uses</string>
 
     <string name="pref_key_car_type">car_type_key</string>
     <string name="pref_title_car_type">Car Type</string>
@@ -65,6 +68,9 @@
     </string-array>
     <string name="preference_car_type_values_default">2</string>
 
+    <string name="pref_key_knows_usage">knows_usage</string>
+    <string name="pref_title_knows_usage">Car Fuel Consumption</string>
+    <string name="pref_summary_knows_usage">I can specify the value in [l/100km].</string>
 
     <string name="pref_key_fuel_type">fuel_type_key</string>
     <string name="pref_title_fuel_type">Fuel Type</string>

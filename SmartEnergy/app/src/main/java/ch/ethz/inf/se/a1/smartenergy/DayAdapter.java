@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -52,7 +51,7 @@ public class DayAdapter extends BaseAdapter {
         TextView subtitleTextView = (TextView) rowView.findViewById(R.id.day_list_subtitle);
 
         Day day = (Day) getItem(position);
-        String dayString = android.text.format.DateFormat.format("EEEE", day.date).toString();
+        String dayString = android.text.format.DateFormat.format("EEEE", day.date).toString(); // TODO: handle nullpointer on day. (happened the first time i opened the app)
 
         titleTextView.setText(dayString);
         subtitleTextView.setText("Total amount of CO2: " + day.getTotalCo2());

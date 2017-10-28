@@ -4,42 +4,22 @@
         android:title="@string/pref_header_transport"
         android:key="pref_key_transport_settings">
 
-        <CheckBoxPreference
-            android:key="pref_plane"
-            android:title="@string/pref_transport_plane"
-            android:summary="@string/pref_transport_sum_plane"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
-            android:key="pref_train"
-            android:title="@string/pref_transport_train"
-            android:summary="@string/pref_transport_sum_train"
-            android:defaultValue="true" />
-
-        <CheckBoxPreference
-            android:key="pref_car"
-            android:title="@string/pref_transport_car"
-            android:summary="@string/pref_transport_sum_car"
-            android:defaultValue="true" />
-
-        <CheckBoxPreference
-            android:key="pref_tram"
-            android:title="@string/pref_transport_tram"
-            android:summary="@string/pref_transport_sum_tram"
-            android:defaultValue="true" />
-
-        <CheckBoxPreference
-            android:key="pref_bicycle"
-            android:title="@string/pref_transport_bicycle"
-            android:summary="@string/pref_transport_sum_bicycle"
-            android:defaultValue="true" />
-
         <MultiSelectListPreference
             android:key="@string/pref_key_used_transportation"
             android:title="@string/pref_title_used_transportation"
             android:entries="@array/preference_array_used_transportation_entries"
             android:entryValues="@array/preference_array_used_transportation_values"
             android:summary="@string/pref_summary_used_transportation"/>
+
+        <CheckBoxPreference
+            android:key="@string/pref_key_knows_usage"
+            android:title="@string/pref_title_knows_usage"
+            android:summary="@string/pref_summary_knows_usage"/>
+
+        <EditTextPreference
+            android:key="@string/pref_key_usage"
+            android:numeric="decimal"
+            android:summary="@string/pref_summary_usage"/>
 
         <ListPreference
             android:key="@string/pref_key_car_type"
@@ -48,6 +28,7 @@
             android:entries="@array/preference_array_car_type_entries"
             android:entryValues="@array/preference_array_car_type_values"
             android:summary="@string/pref_summary_car_type"/>
+
 
         <ListPreference
             android:key="@string/pref_key_fuel_type"
