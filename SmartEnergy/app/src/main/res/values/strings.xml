@@ -31,12 +31,18 @@
     <string name="pref_title_used_transportation">Modes of Transport</string>
     <string name="pref_summary_used_transportation">Choose the means of transportation you use regularly</string>
 
+    <string name="airplane">Airplane</string>
+    <string name="train">Train</string>
+    <string name="car">Car</string>
+    <string name="tram">Tram</string>
+    <string name="bicycle">Bicycle</string>
+
     <string-array name="preference_array_used_transportation_entries">
-        <item>Airplane</item>
-        <item>Train</item>
-        <item>Car</item>
-        <item>Tram</item>
-        <item>Bicycle</item>
+        <item>@string/airplane</item>
+        <item>@string/train</item>
+        <item>@string/car</item>
+        <item>@string/tram</item>
+        <item>@string/bicycle</item>
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_used_transportation_values">
