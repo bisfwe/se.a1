@@ -11,21 +11,12 @@
     <!-- Strings related to Settings -->
     <!-- Category Transport -->
     <string name="pref_header_transport">Modes of Transport</string>
-    <string name="pref_transport_plane">Airplane</string>
-    <string name="pref_transport_sum_plane">"Check if you're using planes regularly"</string>
 
-    <string name="pref_transport_train">Train</string>
-    <string name="pref_transport_sum_train">"Check if you're using trains regularly"</string>
-
-    <string name="pref_transport_car">Car</string>
-    <string name="pref_transport_sum_car">"Check if you're using a car regularly"</string>
-
-    <string name="pref_transport_tram">Tram</string>
-    <string name="pref_transport_sum_tram">"Check if you're using trams regularly"</string>
-
-    <string name="pref_transport_bicycle">Bicycle</string>
-    <string name="pref_transport_sum_bicycle">"Check if you're using a bike regularly"</string>
-
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
 
     <string name="pref_key_used_transportation">used_transportation_type_key</string>
     <string name="pref_title_used_transportation">Modes of Transport</string>
@@ -46,13 +37,14 @@
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_used_transportation_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>@string/one</item>
+        <item>@string/two</item>
+        <item>@string/three</item>
+        <item>@string/four</item>
+        <item>@string/five</item>
     </string-array>
 
+    <string name="intro_car_usage">Specify the amount of [l/100km] your car uses or pick a given option.</string>
     <string name="pref_key_usage">pref_key_usage</string>
     <string name="pref_title_usage">Car Fuel Usage</string>
     <string name="pref_summary_usage">How many [l/100km] my care uses</string>
@@ -61,10 +53,14 @@
     <string name="pref_title_car_type">Car Type</string>
     <string name="pref_summary_car_type">Choose the type of your primary used car</string>
 
+    <string name="small">Small (x l/100km)</string>
+    <string name="medium">Medium (x l/100km)</string>
+    <string name="big">Big (x l/100km)</string>
+
     <string-array name="preference_array_car_type_entries">
-        <item>Small (x l/100km)</item>
-        <item>Medium (x l/100km)</item>
-        <item>Big (x l/100km)</item>
+        <item>@string/small</item>
+        <item>@string/medium</item>
+        <item>@string/big</item>
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_car_type_values">
@@ -74,17 +70,21 @@
     </string-array>
     <string name="preference_car_type_values_default">2</string>
 
+    <string name="fuelUnit">l/100km</string>
     <string name="pref_key_knows_usage">knows_usage</string>
-    <string name="pref_title_knows_usage">Car Fuel Consumption</string>
+    <string name="pref_title_knows_usage">Car Fuel Consumption Known</string>
     <string name="pref_summary_knows_usage">I can specify the value in [l/100km].</string>
 
     <string name="pref_key_fuel_type">fuel_type_key</string>
     <string name="pref_title_fuel_type">Fuel Type</string>
     <string name="pref_summary_fuel_type">Choose the type of fuel your primary car uses</string>
 
+    <string name="petrol">Petrol</string>
+    <string name="diesel">Diesel</string>
+
     <string-array name="preference_array_fuel_type_entries">
-        <item>Petrol</item>
-        <item>Diesel</item>
+        <item>@string/petrol</item>
+        <item>@string/diesel</item>
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_fuel_type_values">

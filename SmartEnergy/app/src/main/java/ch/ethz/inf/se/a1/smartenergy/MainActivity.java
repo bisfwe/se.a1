@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         mContext = this;
         // Show intro the very first time the app is opened
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this); //getSharedPreferences("IntroPreferences", Context.MODE_PRIVATE);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         if (!pref.getBoolean("introDone", false)) {
             Intent intent = new Intent(this, IntroActivity.class);
             startActivityForResult(intent, 0);

@@ -19,6 +19,7 @@
         <EditTextPreference
             android:key="@string/pref_key_usage"
             android:numeric="decimal"
+            android:defaultValue="0.0"
             android:summary="@string/pref_summary_usage"/>
 
         <ListPreference
