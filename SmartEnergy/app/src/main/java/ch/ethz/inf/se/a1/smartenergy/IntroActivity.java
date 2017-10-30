@@ -1,8 +1,10 @@
 package ch.ethz.inf.se.a1.smartenergy;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -48,10 +50,10 @@ public class IntroActivity extends AppIntro {
         super.onDonePressed(currentFragment);
 
         // Keep in mind that the intro was done successfully and has never to be done again
-//        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-//        SharedPreferences.Editor ed = pref.edit();
-//        ed.putBoolean("introDone", true);
-//        ed.commit();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor ed = pref.edit();
+        ed.putBoolean("introDone", true);
+        ed.commit();
 
         // close this activity, will go back to the MainActivity and one can not come back
         this.finish();
