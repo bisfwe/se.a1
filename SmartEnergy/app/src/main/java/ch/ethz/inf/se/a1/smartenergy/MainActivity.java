@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity
                     currentDayUpdates.add(u);
 
                 } else {
-                    days.add(new Day(currentDayUpdates, this));
+                    days.add(new Day(currentDayUpdates, this.getApplicationContext()));
                     currentDayUpdates = new ArrayList<Update>();
                     currentDayUpdates.add(u);
                     currentDate = updateDate;
@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            days.add(new Day(currentDayUpdates, this));
+            days.add(new Day(currentDayUpdates, this.getApplicationContext()));
         }
     }
 
