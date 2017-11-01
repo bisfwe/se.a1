@@ -47,16 +47,19 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/radio_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/small" />
 
         <RadioButton
+            android:id="@+id/radio_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/medium" />
 
         <RadioButton
+            android:id="@+id/radio_big"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/big" />
@@ -73,11 +76,13 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/radio_petrol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/petrol" />
 
         <RadioButton
+            android:id="@+id/radio_diesel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/diesel" />

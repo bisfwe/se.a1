@@ -44,8 +44,7 @@ public class TransportationModes extends Fragment implements ISlideBackgroundCol
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        Set<String> selections = sharedPrefs.getStringSet(getString(R.string.pref_key_used_transportation), null);
+        Set<String> selections = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
         if (selections != null) {
             selectionsCopy.addAll(selections);
             String[] selected = selections.toArray(new String[]{});

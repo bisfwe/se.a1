@@ -64,9 +64,9 @@
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_car_type_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>@string/one</item>
+        <item>@string/two</item>
+        <item>@string/three</item>
     </string-array>
     <string name="preference_car_type_values_default">2</string>
 
