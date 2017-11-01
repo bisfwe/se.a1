@@ -14,9 +14,11 @@ public class Day {
 
     public static Calendar date;
     public ArrayList<Aktivitaet> aktivitaetenList;
+    private Context context;
 
     //initialize Day with a list of updates that have to be all on the same day
     public Day(ArrayList<Update> updates, Context context) {
+        this.context = context;
 
         //sort the updates in ascending time
         Collections.sort(updates);
@@ -54,6 +56,9 @@ public class Day {
                         }
                     }
                     aktivitaetenList.add(new Aktivitaet(startOfActivity, currentUpdate, context));
+                    if (i< updates.size()-1){
+                        startOfActivity = updates.get(i+1);
+                    }
                 }
             }
         }
