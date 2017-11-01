@@ -21,7 +21,7 @@ import ch.ethz.inf.se.a1.smartenergy.introfragments.TransportationModes;
  * This intro is only shown a single time (the first time the app is opened).
  */
 
-public class IntroActivity extends AppIntro {
+public class IntroActivity extends AppIntro2 {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +37,10 @@ public class IntroActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance("Smart Energy", "Thanks, everything is set up.", R.drawable.folder, Color.parseColor("#653BB5")));
 
         // Add permission request to the according slides
-//        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-//        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3);
+        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3);
 
-        showSkipButton(true); // intro has to be done
+        showSkipButton(false); // intro has to be done
         setProgressButtonEnabled(true); // see how far you are in the intro
         getSupportActionBar().hide(); // do not show the action bar
 

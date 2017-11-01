@@ -29,30 +29,35 @@
         android:id="@+id/checkBoxAirplane"
         android:text="@string/airplane"
         android:textColor="@color/white"
+        android:buttonTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <CheckBox
         android:id="@+id/checkBoxTrain"
         android:text="@string/train"
         android:textColor="@color/white"
+        android:buttonTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <CheckBox
         android:id="@+id/checkBoxCar"
         android:text="@string/car"
         android:textColor="@color/white"
+        android:buttonTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <CheckBox
         android:id="@+id/checkBoxTram"
         android:text="@string/tram"
         android:textColor="@color/white"
+        android:buttonTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <CheckBox
         android:id="@+id/checkBoxBicycle"
         android:text="@string/bicycle"
         android:textColor="@color/white"
+        android:buttonTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

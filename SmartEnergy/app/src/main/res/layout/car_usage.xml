@@ -12,12 +12,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150sp"
-        app:srcCompat="@drawable/ic_car_hatchback_black_48dp" />
+        app:srcCompat="@drawable/ic_car_hatchback_white_48dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/white"
         android:paddingBottom="20sp"
         android:text="@string/intro_car_usage"
         android:textSize="18sp" />
@@ -32,10 +33,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
             android:ems="10"
             android:inputType="numberDecimal" />
 
         <TextView
+            android:textColor="@color/white"
             android:text="@string/fuelUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -47,18 +51,24 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/small" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/medium" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_big"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,6 +76,7 @@
     </RadioGroup>
 
     <TextView
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
@@ -76,12 +87,16 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_petrol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/petrol" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_diesel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
