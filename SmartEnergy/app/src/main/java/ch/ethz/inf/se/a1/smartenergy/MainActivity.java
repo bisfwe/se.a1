@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -188,23 +186,26 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_info) {
             // got to list view
-            Intent intent = new Intent(this, GraphActivity.class);
+            /*Intent intent = new Intent(this, GraphActivity.class);
             String message = "Graph activity";
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
+            */
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_tutorial) {
 
-        } else if (id == R.id.nav_manage) {
+            //TODO: start tutorial again
+
+        } else if (id == R.id.nav_settings) {
             //go to settings
-            Intent intent = new Intent(this, SettingsActivity.class);
+           /* Intent intent = new Intent(this, SettingsActivity.class);
             String message = "test_message";
             intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
+            startActivity(intent); */
+
+           //TODO: switch to settings
 
         } else if (id == R.id.nav_share) {
 
@@ -225,8 +226,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(Intent.createChooser(shareIntent, "Choose a messenger to share this App and your CO2 consumption!"));
             }
 
-
-        } else if (id == R.id.nav_send) {
 
         }
 
