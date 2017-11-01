@@ -163,12 +163,12 @@
     <string name="pref_title_age">Housing Type (efficiency)</string>
     <string name="pref_summary_age">Choose the type of your primary used housing in terms of efficiency</string>
 
-    <string name="recent">New Building (48/365 kWh/m^2)</string>
-    <string name="renovated">Renovated (90/365 kWh/m^2)</string>
-    <string name="old">Old Building (120/365 kWh/m^2)</string>
-    <string name="minergie">Minergie (38/365 kWh/m^2)</string>
-    <string name="p">Minergie P (30/365 kWh/m^2)</string>
-    <string name="a">Minergie A (0 kWh/m^2)</string>
+    <string name="recent">New Building\n(48/365 kWh/m^2)</string>
+    <string name="renovated">Renovated\n(90/365 kWh/m^2)</string>
+    <string name="old">Old Building\n(120/365 kWh/m^2)</string>
+    <string name="minergie">Minergie\n(38/365 kWh/m^2)</string>
+    <string name="p">Minergie P\n(30/365 kWh/m^2)</string>
+    <string name="a">Minergie A\n(0 kWh/m^2)</string>
 
     <string-array name="preference_array_age_entries">
         <item>@string/recent</item>

@@ -10,7 +10,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
@@ -65,6 +64,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static ListPreference carType, fuelType;
     private static SwitchPreference knowsUsage;
     private static EditTextPreference usage;
+    private static SwitchPreference knowsArea;
+    private static EditTextPreference exactArea;
+    private static ListPreference area;
 
 
     public enum CarType {TRANSPORTATION_SMALL_CAR, TRANSPORTATION_MEDIUM_CAR, TRANSPORTATION_BIG_CAR}
@@ -231,6 +233,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             fuelType = (ListPreference) findPreference(getString(R.string.pref_key_fuel_type));
             knowsUsage = (SwitchPreference) findPreference(getString(R.string.pref_key_knows_usage));
             usage = (EditTextPreference) findPreference((getString(R.string.pref_key_usage)));
+            knowsArea = (SwitchPreference) findPreference(getString(R.string.pref_key_knows_area));
+            exactArea = (EditTextPreference) findPreference((getString(R.string.pref_key_exact_area)));
+            area = (ListPreference) findPreference(getString(R.string.pref_key_area));
 
             if (usedTransportation.getValues().contains(Integer.toString(TRANSPORTATION_CAR))) {
                 carType.setEnabled(true);
@@ -260,6 +265,28 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     } else {
                         carType.setEnabled(true);
                         usage.setEnabled(false);
+                    }
+                    return true;
+                }
+            });
+
+            if (knowsArea.isChecked()){
+                area.setEnabled(false);
+            } else {
+                exactArea.setEnabled(false);
+            }
+
+            knowsArea.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Log.d(TAG, "values: " + newValue);
+
+                    if (Boolean.valueOf(newValue.toString())) {
+                        area.setEnabled(false);
+                        exactArea.setEnabled(true);
+                    } else {
+                        area.setEnabled(true);
+                        exactArea.setEnabled(false);
                     }
                     return true;
                 }
