@@ -13,6 +13,7 @@ import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import ch.ethz.inf.se.a1.smartenergy.introfragments.CarUsage;
+import ch.ethz.inf.se.a1.smartenergy.introfragments.Lifestyle;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.TransportationModes;
 
 /**
@@ -32,11 +33,12 @@ public class IntroActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance("Smart Energy", "Now, we will go through a few settings on the next pages. You can also change them later by going to \"Settings\".", R.drawable.folder, getResources().getColor(R.color.violet)));
         addSlide(new TransportationModes());
         addSlide(new CarUsage());
+        addSlide(new Lifestyle());
         addSlide(AppIntroFragment.newInstance("Smart Energy", "Thanks, everything is set up.", R.drawable.folder, Color.parseColor("#653BB5")));
 
         // Add permission request to the according slides
-        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3);
+//        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+//        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3);
 
         showSkipButton(true); // intro has to be done
         setProgressButtonEnabled(true); // see how far you are in the intro

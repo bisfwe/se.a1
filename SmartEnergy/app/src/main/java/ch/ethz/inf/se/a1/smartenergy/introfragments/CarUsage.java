@@ -50,9 +50,8 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         EditText editText = (EditText) view.findViewById(R.id.editTextFuelUsage);
-        editText.setText(sharedPrefs.getString(getString(R.string.pref_key_usage), "0.0"));
+        editText.setText(pref.getString(getString(R.string.pref_key_usage), "0.0"));
 
         // get fuel consumption value and set it
         String fuelConsumption = pref.getString(getString(R.string.pref_key_usage), "20"); // TODO: place default value here, e..g medium

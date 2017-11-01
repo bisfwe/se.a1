@@ -101,14 +101,20 @@
     <string name="pref_header_lifestyle">Lifestyle</string>
     <string name="pref_key_diet_type">diet_type_key</string>
     <string name="pref_title_diet_type">Diet Type</string>
-    <string name="pref_summary_diet_type">Choose the diet type that best fits you</string>
+    <string name="pref_summary_diet_type">Choose the diet type that best fits you.</string>
+
+    <string name="meet_lover">Meet Lover</string>
+    <string name="average">Average</string>
+    <string name="no_beef">No Beef</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="vegan">Vegan</string>
 
     <string-array name="preference_array_diet_type_entries">
-        <item>Meet Lover</item>
-        <item>Average</item>
-        <item>No Beef</item>
-        <item>Vegetarian</item>
-        <item>Vegan</item>
+        <item>@string/meet_lover</item>
+        <item>@string/average</item>
+        <item>@string/no_beef</item>
+        <item>@string/vegetarian</item>
+        <item>@string/vegan</item>
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_diet_type_values">
