@@ -13,19 +13,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/white"
         android:paddingBottom="20sp"
         android:text="@string/pref_header_lifestyle"
         android:textSize="30sp" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150sp"
-        app:srcCompat="@drawable/ic_car_hatchback_black_48dp" />
+        android:layout_height="200sp"
+        app:srcCompat="@drawable/ic_restaurant_menu_white_48dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/white"
         android:paddingBottom="20sp"
         android:text="@string/pref_summary_diet_type"
         android:textSize="18sp" />
@@ -35,30 +37,40 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_meet_lover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/meet_lover" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_average"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/average" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_no_beef"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/no_beef" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_vegetarian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/vegetarian" />
 
         <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/radio_vegan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
