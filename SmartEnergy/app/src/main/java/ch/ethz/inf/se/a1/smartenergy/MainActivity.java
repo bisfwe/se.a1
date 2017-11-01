@@ -208,6 +208,24 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share this app");
+
+            if (days.size() > 1) {
+
+                Day currentDay = days.get(days.size()-1);
+                String shareMessage = "With the App SmartEnergy, I can see how much CO2 I produce. Today I produced " + currentDay.getTotalCo2()+ " CO2. Isn't this fascinating? Check the app out and do something for your environment!";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "Choose a messenger to share this App and your CO2 consumption!"));
+            }
+            else {
+                String shareMessage = "With the App SmartEnergy, I can see how much CO2 I produce. Check it out as well and do something for your environment!";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "Choose a messenger to share this App and your CO2 consumption!"));
+            }
+
+
         } else if (id == R.id.nav_send) {
 
         }
