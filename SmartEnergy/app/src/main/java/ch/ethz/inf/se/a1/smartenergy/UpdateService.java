@@ -262,7 +262,13 @@ public class UpdateService extends Service
 
         Log.e(TAG, "Activities: " + detectedActivities);
 
-        saveNewUpdate(new Update(currentTime, location, detectedActivities), this);
+        if (detectedActivities != null){
+            if (detectedActivities.size() > 0) {
+                saveNewUpdate(new Update(currentTime, location, detectedActivities), this);
+            }
+        }
+
+
 
 
     }

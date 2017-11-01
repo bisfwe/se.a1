@@ -24,17 +24,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.DetectedActivity;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity
@@ -70,9 +63,6 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-        ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
-                getDefaultSharedPreferences(this).getString(
-                        Constants.KEY_DETECTED_ACTIVITIES, ""));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -244,34 +234,35 @@ public class MainActivity extends AppCompatActivity
 
         ArrayList<Update> allUpdatesEver = UpdateService.loadAllUpdates(mContext);
 
-        //process all updates, day by day
-        ArrayList <Update> currentDayUpdates = new ArrayList<Update>();
-        Calendar currentDate = null;
-        for (Update u : allUpdatesEver) {
-            if (currentDate == null) {
-                currentDate = Calendar.getInstance();
-                currentDate.setTime(new Date(u.getTime()));
-            }
-            Calendar updateDate = Calendar.getInstance();
-            updateDate.setTime(new Date(u.getTime()));
+        if (allUpdatesEver.size() > 0) {
+            //process all updates, day by day
+            ArrayList<Update> currentDayUpdates = new ArrayList<Update>();
+            Calendar currentDate = null;
+            for (Update u : allUpdatesEver) {
+                if (currentDate == null) {
+                    currentDate = Calendar.getInstance();
+                    currentDate.setTime(new Date(u.getTime()));
+                }
+                Calendar updateDate = Calendar.getInstance();
+                updateDate.setTime(new Date(u.getTime()));
 
-            if (    currentDate.get(Calendar.YEAR) == updateDate.get(Calendar.YEAR) &&
-                    currentDate.get(Calendar.MONTH) == updateDate.get(Calendar.MONTH) &&
-                    currentDate.get(Calendar.DAY_OF_MONTH) == updateDate.get(Calendar.DAY_OF_MONTH)
-                    ) {
-                currentDayUpdates.add(u);
+                if (currentDate.get(Calendar.YEAR) == updateDate.get(Calendar.YEAR) &&
+                        currentDate.get(Calendar.MONTH) == updateDate.get(Calendar.MONTH) &&
+                        currentDate.get(Calendar.DAY_OF_MONTH) == updateDate.get(Calendar.DAY_OF_MONTH)
+                        ) {
+                    currentDayUpdates.add(u);
 
-            }
-            else {
-                days.add(new Day(currentDayUpdates, this));
-                currentDayUpdates = new ArrayList<Update>();
-                currentDayUpdates.add(u);
-                currentDate = updateDate;
+                } else {
+                    days.add(new Day(currentDayUpdates, this));
+                    currentDayUpdates = new ArrayList<Update>();
+                    currentDayUpdates.add(u);
+                    currentDate = updateDate;
 
+                }
             }
+
+            days.add(new Day(currentDayUpdates, this));
         }
-
-        days.add(new Day(currentDayUpdates, this));
     }
 
     private boolean canAccessLocation() {
