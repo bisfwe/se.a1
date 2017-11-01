@@ -7,7 +7,7 @@ android {
         applicationId "ch.ethz.inf.se.a1.smartenergy"
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 21
-        targetSdkVersion 21
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

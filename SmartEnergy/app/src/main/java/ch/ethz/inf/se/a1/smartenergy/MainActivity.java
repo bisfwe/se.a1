@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -165,45 +163,30 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_info) {
             // got to list view
-            Intent intent = new Intent(this, GraphActivity.class);
+            /*Intent intent = new Intent(this, GraphActivity.class);
             String message = "Graph activity";
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
+            */
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_tutorial) {
 
-        } else if (id == R.id.nav_manage) {
-            //go to settings
+            // start tutorial again
+            Intent intent = new Intent(this, IntroActivity.class);
+            startActivityForResult(intent, 0);
+
+        } else if (id == R.id.nav_settings) {
+
+           // switch to settings
             Intent intent = new Intent(this, SettingsActivity.class);
-            String message = "test_message";
-            intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
 
         } else if (id == R.id.nav_share) {
@@ -225,8 +208,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(Intent.createChooser(shareIntent, "Choose a messenger to share this App and your CO2 consumption!"));
             }
 
-
-        } else if (id == R.id.nav_send) {
 
         }
 

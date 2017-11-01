@@ -11,7 +11,7 @@
             android:entryValues="@array/preference_array_used_transportation_values"
             android:summary="@string/pref_summary_used_transportation"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/pref_key_knows_usage"
             android:title="@string/pref_title_knows_usage"
             android:summary="@string/pref_summary_knows_usage"/>
@@ -30,7 +30,6 @@
             android:entryValues="@array/preference_array_car_type_values"
             android:summary="@string/pref_summary_car_type"/>
 
-
         <ListPreference
             android:key="@string/pref_key_fuel_type"
             android:title="@string/pref_title_fuel_type"
@@ -38,13 +37,6 @@
             android:entries="@array/preference_array_fuel_type_entries"
             android:entryValues="@array/preference_array_fuel_type_values"
             android:summary="@string/pref_summary_fuel_type"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/pref_header_home"
-        android:key="pref_key_home_settings">
-
 
     </PreferenceCategory>
 
@@ -61,4 +53,46 @@
             android:summary="@string/pref_summary_diet_type"/>
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_home"
+        android:key="pref_key_home_settings">
+
+        <ListPreference
+            android:key="@string/pref_key_heating_type"
+            android:title="@string/pref_title_heating_type"
+            android:defaultValue="@string/preference_heating_type_values_default"
+            android:entries="@array/preference_array_heating_type_entries"
+            android:entryValues="@array/preference_array_heating_type_values"
+            android:summary="@string/pref_summary_heating_type"/>
+
+        <SwitchPreference
+            android:key="@string/pref_key_knows_area"
+            android:title="@string/pref_title_knows_area"
+            android:summary="@string/pref_summary_knows_area"/>
+
+        <EditTextPreference
+            android:key="@string/pref_key_exact_area"
+            android:numeric="decimal"
+            android:defaultValue="0.0"
+            android:summary="@string/pref_summary_exact_area"/>
+
+        <ListPreference
+            android:key="@string/pref_key_area"
+            android:title="@string/pref_title_area"
+            android:defaultValue="@string/preference_area_values_default"
+            android:entries="@array/preference_array_area_entries"
+            android:entryValues="@array/preference_array_area_values"
+            android:summary="@string/pref_summary_area"/>
+
+        <ListPreference
+            android:key="@string/pref_key_age"
+            android:title="@string/pref_title_age"
+            android:defaultValue="@string/preference_age_values_default"
+            android:entries="@array/preference_array_age_entries"
+            android:entryValues="@array/preference_array_age_values"
+            android:summary="@string/pref_summary_age"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
