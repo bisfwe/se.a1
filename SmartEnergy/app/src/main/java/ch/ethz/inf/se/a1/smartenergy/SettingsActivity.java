@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static final String TAG = "SettingsActivity";
 
     public static final int TRANSPORTATION_AIRPLANE = 1;
-    public static final int TRANPORTATION_TRAIN = 2;
+    public static final int TRANSPORTATION_TRAIN = 2;
     public static final int TRANSPORTATION_CAR = 3;
     public static final int TRANSPORTATION_TRAM = 4;
     public static final int TRANSPORTATION_BICYCLE = 5;

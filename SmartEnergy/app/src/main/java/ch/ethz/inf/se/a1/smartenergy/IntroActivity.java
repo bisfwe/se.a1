@@ -30,18 +30,18 @@ public class IntroActivity extends AppIntro2 {
         super.onCreate(savedInstanceState);
 
         // Add intro slides
-        addSlide(AppIntroFragment.newInstance("Smart Energy", "Hello, welcome to Smart Energy. This app starts a service in the background that keeps track of information related to your carbon dioxide footprint.", R.drawable.folder, getResources().getColor(R.color.colorPrimary)));
-//        addSlide(AppIntroFragment.newInstance("Smart Energy", "In order to store the logged data, please allow access to the storage system. Otherwise, the app cannot work.", R.drawable.folder, getResources().getColor(R.color.orange)));
-        addSlide(AppIntroFragment.newInstance("Smart Energy", "In order to get your position, the app needs location access.", R.drawable.location, getResources().getColor(R.color.turkey)));
-        addSlide(AppIntroFragment.newInstance("Smart Energy", "Giving you the most accurate transportation mode classifications, the app needs internet access.", R.drawable.ic_network_wifi_white_48dp, getResources().getColor(R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("Smart Energy", "Now, we will go through a few settings on the next pages. You can also change them later by going to \"Settings\" or doing the tutorial again.", R.drawable.folder, getResources().getColor(R.color.violet)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.welcome), R.drawable.folder, getResources().getColor(R.color.colorPrimary)));
+//        addSlide(AppIntroFragment.newInstance("Smart Energy", getString(R.string.permission_storage), R.drawable.folder, getResources().getColor(R.color.orange)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_location), R.drawable.location, getResources().getColor(R.color.turkey)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_internet), R.drawable.ic_network_wifi_white_48dp, getResources().getColor(R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.going_settings), R.drawable.ic_settings_white_48dp, getResources().getColor(R.color.violet)));
         addSlide(new TransportationModes());
         addSlide(new CarUsage());
         addSlide(new Lifestyle());
         addSlide(new LivingArea());
         addSlide(new HouseType());
         addSlide(new HeatingType());
-        addSlide(AppIntroFragment.newInstance("Smart Energy", "Thanks, everything is set up.", R.drawable.folder, Color.parseColor("#653BB5")));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.all_set), R.drawable.folder, Color.parseColor("#653BB5")));
 
         // Add permission request to the according slides
 //        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);

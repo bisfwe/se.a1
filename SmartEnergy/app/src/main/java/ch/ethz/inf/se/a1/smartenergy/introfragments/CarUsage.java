@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,8 @@ import java.util.Set;
 import ch.ethz.inf.se.a1.smartenergy.R;
 import ch.ethz.inf.se.a1.smartenergy.SettingsActivity;
 
+import static ch.ethz.inf.se.a1.smartenergy.SettingsActivity.TRANSPORTATION_CAR;
+
 public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
 
     private final static String TAG = "CarUsage";
@@ -36,6 +39,8 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
 
     SharedPreferences pref;
     SharedPreferences.Editor ed;
+
+    EditText fuelUsage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,14 +53,18 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.car_usage, container, false);
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        ed = pref.edit();
 
-        EditText editText = (EditText) view.findViewById(R.id.editTextFuelUsage);
-        editText.setText(pref.getString(getString(R.string.pref_key_usage), "0.0"));
+        Set transportationModes = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
+        if (transportationModes != null && !transportationModes.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
+            // TODO: skip slide, but how?
+            Log.i(TAG, "should skip slide");
+        }
+
+        ed = pref.edit();
 
         // get fuel consumption value and set it
         String fuelConsumption = pref.getString(getString(R.string.pref_key_usage), "0.0"); // TODO: place default value here, e..g medium
-        final EditText fuelUsage = (EditText) view.findViewById(R.id.editTextFuelUsage);
+        fuelUsage = (EditText) view.findViewById(R.id.editTextFuelUsage);
         fuelUsage.setText(fuelConsumption);
 
         // write value to settings if changed
@@ -95,6 +104,7 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             fuelUsage.setText("16"); // TODO: update this and the following 2 values
+                            ed.putString(getString(R.string.pref_key_usage), "16"); // TODO: update this and the following 2 values
                             ed.putString(getString(R.string.pref_key_car_type), getString(R.string.one));
                             ed.putBoolean(getString(R.string.pref_key_knows_usage), false);
                             ed.apply();
@@ -109,6 +119,7 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             fuelUsage.setText("16");
+                            ed.putString(getString(R.string.pref_key_usage), "16");
                             ed.putString(getString(R.string.pref_key_car_type), getString(R.string.two));
                             ed.putBoolean(getString(R.string.pref_key_knows_usage), false);
                             ed.apply();
@@ -123,6 +134,7 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             fuelUsage.setText("16");
+                            ed.putString(getString(R.string.pref_key_usage), "16");
                             ed.putString(getString(R.string.pref_key_car_type), getString(R.string.three));
                             ed.putBoolean(getString(R.string.pref_key_knows_usage), false);
                             ed.apply();

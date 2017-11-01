@@ -39,7 +39,7 @@ public class HeatingType extends Fragment implements ISlideBackgroundColorHolder
         ed = pref.edit();
 
         // get settings to display radio buttons
-        String carType = pref.getString(getString(R.string.pref_key_heating_type), Integer.toString(SettingsActivity.HOME_RENOVATED));
+        String carType = pref.getString(getString(R.string.pref_key_heating_type), Integer.toString(SettingsActivity.HOME_OIL));
         switch (Integer.parseInt(carType)) {
             case SettingsActivity.HOME_GAS:
                 ((RadioButton) view.findViewById(R.id.radio_gas)).toggle();

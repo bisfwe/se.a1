@@ -27,6 +27,7 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
 
     SharedPreferences pref;
     SharedPreferences.Editor ed;
+    EditText exactAreaUsage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,14 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 
-        final EditText editText = (EditText) view.findViewById(R.id.editTextAreaUsage);
+        exactAreaUsage = (EditText) view.findViewById(R.id.editTextAreaUsage);
 
-        // get fuel consumption value and set it
-        String areaUsage = pref.getString(getString(R.string.pref_key_area), "80");
-        editText.setText(areaUsage);
+        // get area value and set it
+        String areaUsage = pref.getString(getString(R.string.pref_key_exact_area), "80");
+        exactAreaUsage.setText(areaUsage);
 
         // write value to settings if changed
-        editText.addTextChangedListener(new TextWatcher() {
+        exactAreaUsage.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -59,15 +60,15 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
 
             @Override
             public void afterTextChanged(Editable s) {
-                ed.putString(getString(R.string.pref_key_area), s.toString());
+                ed.putString(getString(R.string.pref_key_exact_area), s.toString());
                 ed.putBoolean(getString(R.string.pref_key_knows_area), true);
                 ed.apply();
             }
         });
 
         // get settings to display radio buttons
-        String carType = pref.getString(getString(R.string.pref_key_area), Integer.toString(SettingsActivity.HOME_FLAT));
-        switch (Integer.parseInt(carType)) {
+        String areaType = pref.getString(getString(R.string.pref_key_area), Integer.toString(SettingsActivity.HOME_FLAT));
+        switch (Integer.parseInt(areaType)) {
             case SettingsActivity.HOME_ROOM:
                 ((RadioButton) view.findViewById(R.id.radio_room)).toggle();
                 break;
@@ -88,7 +89,8 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            editText.setText("16");
+                            exactAreaUsage.setText("16");
+                            ed.putString(getString(R.string.pref_key_exact_area), "16");
                             ed.putString(getString(R.string.pref_key_area), getString(R.string.one));
                             ed.putBoolean(getString(R.string.pref_key_knows_area), false);
                             ed.apply();
@@ -102,7 +104,8 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            editText.setText("80");
+                            exactAreaUsage.setText("80");
+                            ed.putString(getString(R.string.pref_key_exact_area), "80");
                             ed.putString(getString(R.string.pref_key_area), getString(R.string.two));
                             ed.putBoolean(getString(R.string.pref_key_knows_area), false);
                             ed.apply();
@@ -116,7 +119,8 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            editText.setText("180");
+                            exactAreaUsage.setText("180");
+                            ed.putString(getString(R.string.pref_key_exact_area), "180");
                             ed.putString(getString(R.string.pref_key_area), getString(R.string.three));
                             ed.putBoolean(getString(R.string.pref_key_knows_area), false);
                             ed.apply();
@@ -130,7 +134,8 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            editText.setText("500");
+                            exactAreaUsage.setText("500");
+                            ed.putString(getString(R.string.pref_key_exact_area), "500");
                             ed.putString(getString(R.string.pref_key_area), getString(R.string.four));
                             ed.putBoolean(getString(R.string.pref_key_knows_area), false);
                             ed.apply();

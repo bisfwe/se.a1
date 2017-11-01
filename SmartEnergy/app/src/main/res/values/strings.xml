@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartEnergy</string>
+    <string name="app_name">Smart Energy</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,7 +8,16 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_intro">Introduction</string>
 
-    <!-- Strings related to Settings -->
+    <!-- Strings related to Settings and Intro -->
+    <!-- Intro only -->
+    <string name="welcome">Hello, welcome to Smart Energy. This app starts a service in the background that keeps track of information related to your carbon dioxide footprint.</string>
+    <string name="permission_storage">In order to store the logged data, please allow access to the storage system. Otherwise, the app cannot work.</string>
+    <string name="permission_location">In order to get your position, the app needs location access.</string>
+    <string name="permission_internet">Giving you the most accurate transportation mode classifications, the app needs internet access.</string>
+    <string name="going_settings">Now, we will go through a few settings on the next pages. You can also change them later by going to \"Settings\" or doing the tutorial again.</string>
+    <string name="all_set">Thanks, everything is set up.</string>
+
+
     <!-- Category Transport -->
     <string name="pref_header_transport">Modes of Transport</string>
 
@@ -126,11 +135,11 @@
     <string name="preference_heating_type_values_default">1</string>
 
     <string name="intro_area">Specify how big your primary living area is or pick a given option.</string>
-    <string name="pref_key_exact_area">pref_key_area</string>
+    <string name="pref_key_exact_area">pref_key_exact_area</string>
     <string name="pref_title_exact_area">Size of Living Area</string>
     <string name="pref_summary_exact_area">How many square meters I am living in</string>
 
-    <string name="pref_key_area">area_key</string>
+    <string name="pref_key_area">pref_key_area</string>
     <string name="pref_title_area">Housing Type (area)</string>
     <string name="pref_summary_area">Choose the type of your primary used housing in terms of area</string>
 

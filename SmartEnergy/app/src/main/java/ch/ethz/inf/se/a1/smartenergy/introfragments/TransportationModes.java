@@ -1,7 +1,6 @@
 package ch.ethz.inf.se.a1.smartenergy.introfragments;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -19,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ch.ethz.inf.se.a1.smartenergy.R;
+import ch.ethz.inf.se.a1.smartenergy.SettingsActivity;
 
 public class TransportationModes extends Fragment implements ISlideBackgroundColorHolder {
 
@@ -52,19 +52,19 @@ public class TransportationModes extends Fragment implements ISlideBackgroundCol
 
             for (String aSelected : selected) {
                 switch (Integer.parseInt(aSelected)) {
-                    case 1:
+                    case SettingsActivity.TRANSPORTATION_AIRPLANE:
                         ((CheckBox) view.findViewById(R.id.checkBoxAirplane)).toggle();
                         break;
-                    case 2:
+                    case SettingsActivity.TRANSPORTATION_TRAIN:
                         ((CheckBox) view.findViewById(R.id.checkBoxTrain)).toggle();
                         break;
-                    case 3:
+                    case SettingsActivity.TRANSPORTATION_CAR:
                         ((CheckBox) view.findViewById(R.id.checkBoxCar)).toggle();
                         break;
-                    case 4:
+                    case SettingsActivity.TRANSPORTATION_TRAM:
                         ((CheckBox) view.findViewById(R.id.checkBoxTram)).toggle();
                         break;
-                    case 5:
+                    case SettingsActivity.TRANSPORTATION_BICYCLE:
                         ((CheckBox) view.findViewById(R.id.checkBoxBicycle)).toggle();
                         break;
                 }
