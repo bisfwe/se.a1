@@ -17,6 +17,7 @@
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five">5</string>
+    <string name="six">6</string>
 
     <string name="pref_key_used_transportation">used_transportation_type_key</string>
     <string name="pref_title_used_transportation">Modes of Transport</string>
@@ -97,6 +98,97 @@
     <!-- Category Home -->
     <string name="pref_header_home">Home</string>
 
+    <string name="pref_key_heating_type">heating_type_key</string>
+    <string name="pref_title_heating_type">Heating Type</string>
+    <string name="pref_summary_heating_type">Choose the type of heating system your house uses</string>
+
+    <string name="oil">Oil</string>
+    <string name="gas">Gas</string>
+    <string name="electric">Electric</string>
+    <string name="air">Air Source Heat Pump</string>
+    <string name="ground">Ground Source Heat Pump</string>
+
+    <string-array name="preference_array_heating_type_entries">
+        <item>@string/oil</item>
+        <item>@string/gas</item>
+        <item>@string/electric</item>
+        <item>@string/air</item>
+        <item>@string/ground</item>
+    </string-array>
+    <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
+    <string-array name="preference_array_heating_type_values">
+        <item>@string/one</item>
+        <item>@string/two</item>
+        <item>@string/three</item>
+        <item>@string/four</item>
+        <item>@string/five</item>
+    </string-array>
+    <string name="preference_heating_type_values_default">1</string>
+
+    <string name="intro_area">Specify how big your living area is or pick a given option.</string>
+    <string name="pref_key_exact_area">pref_key_area</string>
+    <string name="pref_title_exact_area">Size of Living Area</string>
+    <string name="pref_summary_exact_area">How many square meters I am living in</string>
+
+    <string name="pref_key_area">area_key</string>
+    <string name="pref_title_area">Housing Type (area)</string>
+    <string name="pref_summary_area">Choose the type of your primary used housing in terms of area</string>
+
+    <string name="areaUnit">m^2</string>
+    <string name="pref_key_knows_area">knows_area</string>
+    <string name="pref_title_knows_area">Living Area Size Known</string>
+    <string name="pref_summary_knows_area">I can specify the value in [m^2].</string>
+
+    <string name="room">Room (16m^2)</string>
+    <string name="flat">Flat (80m^2)</string>
+    <string name="house">House (180m^2)</string>
+    <string name="villa">Villa (500m^2)</string>
+
+    <string-array name="preference_array_area_entries">
+        <item>@string/room</item>
+        <item>@string/flat</item>
+        <item>@string/house</item>
+        <item>@string/villa</item>
+    </string-array>
+    <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
+    <string-array name="preference_array_area_values">
+        <item>@string/one</item>
+        <item>@string/two</item>
+        <item>@string/three</item>
+        <item>@string/four</item>
+    </string-array>
+    <string name="preference_area_values_default">2</string>
+
+    <string name="pref_key_age">area_key</string>
+    <string name="pref_title_age">Housing Type (efficiency)</string>
+    <string name="pref_summary_age">Choose the type of your primary used housing in terms of efficiency</string>
+
+    <string name="recent">New Building (48/365 kWh/m^2)</string>
+    <string name="renovated">Renovated (90/365 kWh/m^2)</string>
+    <string name="old">Old Building (120/365 kWh/m^2)</string>
+    <string name="minergie">Minergie (38/365 kWh/m^2)</string>
+    <string name="p">Minergie P (30/365 kWh/m^2)</string>
+    <string name="a">Minergie A (0 kWh/m^2)</string>
+
+    <string-array name="preference_array_age_entries">
+        <item>@string/recent</item>
+        <item>@string/renovated</item>
+        <item>@string/old</item>
+        <item>@string/minergie</item>
+        <item>@string/p</item>
+        <item>@string/a</item>
+    </string-array>
+    <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
+    <string-array name="preference_array_age_values">
+        <item>@string/one</item>
+        <item>@string/two</item>
+        <item>@string/three</item>
+        <item>@string/four</item>
+        <item>@string/five</item>
+        <item>@string/six</item>
+    </string-array>
+    <string name="preference_age_values_default">2</string>
+
     <!-- Category Lifestyle -->
     <string name="pref_header_lifestyle">Lifestyle</string>
     <string name="pref_key_diet_type">diet_type_key</string>
@@ -118,11 +210,11 @@
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_diet_type_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>@string/one</item>
+        <item>@string/two</item>
+        <item>@string/three</item>
+        <item>@string/four</item>
+        <item>@string/five</item>
     </string-array>
     <string name="preference_diet_type_values_default">2</string>
 

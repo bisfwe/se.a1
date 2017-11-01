@@ -19,6 +19,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -62,7 +63,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     private static MultiSelectListPreference usedTransportation;
     private static ListPreference carType, fuelType;
-    private static CheckBoxPreference knowsUsage;
+    private static SwitchPreference knowsUsage;
     private static EditTextPreference usage;
 
 
@@ -228,7 +229,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             usedTransportation = (MultiSelectListPreference) findPreference(getString(R.string.pref_key_used_transportation));
             carType = (ListPreference) findPreference(getString(R.string.pref_key_car_type));
             fuelType = (ListPreference) findPreference(getString(R.string.pref_key_fuel_type));
-            knowsUsage = (CheckBoxPreference) findPreference(getString(R.string.pref_key_knows_usage));
+            knowsUsage = (SwitchPreference) findPreference(getString(R.string.pref_key_knows_usage));
             usage = (EditTextPreference) findPreference((getString(R.string.pref_key_usage)));
 
             if (usedTransportation.getValues().contains(Integer.toString(TRANSPORTATION_CAR))) {
