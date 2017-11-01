@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/violet"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        app:srcCompat="@drawable/ic_home_white_48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:paddingBottom="20sp"
+        android:text="@string/intro_area"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextAreaUsage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:text="@string/areaUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:id="@+id/radio_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/room" />
+
+        <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:id="@+id/radio_flat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flat" />
+
+        <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:id="@+id/radio_house"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/house" />
+
+        <RadioButton
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:id="@+id/radio_villa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/villa" />
+
+    </RadioGroup>
+
+
+</LinearLayout>

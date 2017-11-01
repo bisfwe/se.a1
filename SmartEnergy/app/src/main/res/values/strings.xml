@@ -125,7 +125,7 @@
     </string-array>
     <string name="preference_heating_type_values_default">1</string>
 
-    <string name="intro_area">Specify how big your living area is or pick a given option.</string>
+    <string name="intro_area">Specify how big your primary living area is or pick a given option.</string>
     <string name="pref_key_exact_area">pref_key_area</string>
     <string name="pref_title_exact_area">Size of Living Area</string>
     <string name="pref_summary_exact_area">How many square meters I am living in</string>
@@ -134,15 +134,15 @@
     <string name="pref_title_area">Housing Type (area)</string>
     <string name="pref_summary_area">Choose the type of your primary used housing in terms of area</string>
 
-    <string name="areaUnit">m^2</string>
+    <string name="areaUnit">m\u00B2</string>
     <string name="pref_key_knows_area">knows_area</string>
     <string name="pref_title_knows_area">Living Area Size Known</string>
-    <string name="pref_summary_knows_area">I can specify the value in [m^2].</string>
+    <string name="pref_summary_knows_area">I can specify the value in [m\u00B2].</string>
 
-    <string name="room">Room (16m^2)</string>
-    <string name="flat">Flat (80m^2)</string>
-    <string name="house">House (180m^2)</string>
-    <string name="villa">Villa (500m^2)</string>
+    <string name="room">Room (16m\u00B2)</string>
+    <string name="flat">Flat (80m\u00B2)</string>
+    <string name="house">House (180m\u00B2)</string>
+    <string name="villa">Villa (500m\u00B2)</string>
 
     <string-array name="preference_array_area_entries">
         <item>@string/room</item>
@@ -163,12 +163,12 @@
     <string name="pref_title_age">Housing Type (efficiency)</string>
     <string name="pref_summary_age">Choose the type of your primary used housing in terms of efficiency</string>
 
-    <string name="recent">New Building\n(48/365 kWh/m^2)</string>
-    <string name="renovated">Renovated\n(90/365 kWh/m^2)</string>
-    <string name="old">Old Building\n(120/365 kWh/m^2)</string>
-    <string name="minergie">Minergie\n(38/365 kWh/m^2)</string>
-    <string name="p">Minergie P\n(30/365 kWh/m^2)</string>
-    <string name="a">Minergie A\n(0 kWh/m^2)</string>
+    <string name="recent">New Building\n(48/365 kWh/m\u00B2)</string>
+    <string name="renovated">Renovated\n(90/365 kWh/m\u00B2)</string>
+    <string name="old">Old Building\n(120/365 kWh/m\u00B2)</string>
+    <string name="minergie">Minergie\n(38/365 kWh/m\u00B2)</string>
+    <string name="p">Minergie P\n(30/365 kWh/m\u00B2)</string>
+    <string name="a">Minergie A\n(0 kWh/m\u00B2)</string>
 
     <string-array name="preference_array_age_entries">
         <item>@string/recent</item>

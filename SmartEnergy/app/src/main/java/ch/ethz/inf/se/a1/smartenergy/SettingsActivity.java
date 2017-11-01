@@ -59,6 +59,24 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static final int LIFESTYLE_VEGETARIAN = 4;
     public static final int LIFESTYLE_VEGAN = 5;
 
+    public static final int HOME_OIL = 1;
+    public static final int HOME_GAS = 2;
+    public static final int HOME_ELECTRIC = 3;
+    public static final int HOME_AIR = 4;
+    public static final int HOME_GROUND = 5;
+
+    public static final int HOME_ROOM = 1;
+    public static final int HOME_FLAT = 2;
+    public static final int HOME_HOUSE = 3;
+    public static final int HOME_VILLA = 4;
+
+    public static final int HOME_NEW = 1;
+    public static final int HOME_RENOVATED = 2;
+    public static final int HOME_OLD = 3;
+    public static final int HOME_MINERGIE = 4;
+    public static final int HOME_P = 5;
+    public static final int HOME_A = 6;
+
 
     private static MultiSelectListPreference usedTransportation;
     private static ListPreference carType, fuelType;
