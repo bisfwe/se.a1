@@ -191,7 +191,10 @@ public class Aktivitaet {
         double result;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean knowsUsage = pref.getBoolean(context.getString(R.string.pref_key_knows_usage),false);
-        int fuelType = pref.getInt(context.getString(R.string.pref_key_fuel_type), SettingsActivity.TRANSPORTATION_PETROL);
+        //int fuelType = pref.getInt(context.getString(R.string.pref_key_fuel_type), SettingsActivity.TRANSPORTATION_PETROL);
+        //quick fix.
+        //TODO: check what went wrong here
+        int fuelType = SettingsActivity.TRANSPORTATION_PETROL;
         if (knowsUsage){
             double fuelConsumption = Double.valueOf(pref.getString(context.getString(R.string.pref_key_usage), "0.0"));
             if (fuelType == SettingsActivity.TRANSPORTATION_PETROL){

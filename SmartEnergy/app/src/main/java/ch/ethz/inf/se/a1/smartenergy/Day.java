@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class Day {
 
-    public static Calendar date;
+    public Calendar date;
     public ArrayList<Aktivitaet> aktivitaetenList;
     private Context context;
 
