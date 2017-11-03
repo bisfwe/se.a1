@@ -117,7 +117,7 @@ public class Aktivitaet {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int lifestyle = pref.getInt("pref_lifestyle", 2);
         switch (lifestyle){
-            case SettingsActivity.LIFESTYLE_MEET_LOVER:
+            case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatLoverCycling/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_AVERAGE:
                 result += Utils.averageCycling/1000 * metersTravelled;
@@ -138,7 +138,7 @@ public class Aktivitaet {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int lifestyle = pref.getInt("pref_lifestyle", 2);
         switch (lifestyle){
-            case SettingsActivity.LIFESTYLE_MEET_LOVER:
+            case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatLoverWalking/1000 * metersTravelled;
                 break;
             case SettingsActivity.LIFESTYLE_AVERAGE:
@@ -164,7 +164,7 @@ public class Aktivitaet {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int lifestyle = pref.getInt("pref_lifestyle", 2);
         switch (lifestyle){
-            case SettingsActivity.LIFESTYLE_MEET_LOVER:
+            case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatloverRunning/1000 * metersTravelled;
             case SettingsActivity.LIFESTYLE_AVERAGE:
                 result += Utils.averageRunning/1000 * metersTravelled;

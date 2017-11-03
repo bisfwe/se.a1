@@ -63,7 +63,7 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
         ed = pref.edit();
 
         // get fuel consumption value and set it
-        String fuelConsumption = pref.getString(getString(R.string.pref_key_usage), "0.0"); // TODO: place default value here, e..g medium
+        String fuelConsumption = pref.getString(getString(R.string.pref_key_usage), "8");
         fuelUsage = (EditText) view.findViewById(R.id.editTextFuelUsage);
         fuelUsage.setText(fuelConsumption);
 
@@ -103,8 +103,8 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            fuelUsage.setText("16"); // TODO: update this and the following 2 values
-                            ed.putString(getString(R.string.pref_key_usage), "16"); // TODO: update this and the following 2 values
+                            fuelUsage.setText("5");
+                            ed.putString(getString(R.string.pref_key_usage), "5");
                             ed.putString(getString(R.string.pref_key_car_type), getString(R.string.one));
                             ed.putBoolean(getString(R.string.pref_key_knows_usage), false);
                             ed.apply();
@@ -118,8 +118,8 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            fuelUsage.setText("16");
-                            ed.putString(getString(R.string.pref_key_usage), "16");
+                            fuelUsage.setText("8");
+                            ed.putString(getString(R.string.pref_key_usage), "8");
                             ed.putString(getString(R.string.pref_key_car_type), getString(R.string.two));
                             ed.putBoolean(getString(R.string.pref_key_knows_usage), false);
                             ed.apply();
@@ -133,8 +133,8 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            fuelUsage.setText("16");
-                            ed.putString(getString(R.string.pref_key_usage), "16");
+                            fuelUsage.setText("12");
+                            ed.putString(getString(R.string.pref_key_usage), "12");
                             ed.putString(getString(R.string.pref_key_car_type), getString(R.string.three));
                             ed.putBoolean(getString(R.string.pref_key_knows_usage), false);
                             ed.apply();

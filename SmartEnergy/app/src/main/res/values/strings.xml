@@ -63,9 +63,9 @@
     <string name="pref_title_car_type">Car Type</string>
     <string name="pref_summary_car_type">Choose the type of your primary used car</string>
 
-    <string name="small">Small (x l/100km)</string>
-    <string name="medium">Medium (x l/100km)</string>
-    <string name="big">Big (x l/100km)</string>
+    <string name="small">Small (5 l/100km)</string>
+    <string name="medium">Medium (8 l/100km)</string>
+    <string name="big">Big (12 l/100km)</string>
 
     <string-array name="preference_array_car_type_entries">
         <item>@string/small</item>
@@ -172,12 +172,12 @@
     <string name="pref_title_age">Housing Type (efficiency)</string>
     <string name="pref_summary_age">Choose the type of your primary used housing in terms of efficiency</string>
 
-    <string name="recent">New Building\n(48/365 kWh/m\u00B2)</string>
-    <string name="renovated">Renovated\n(90/365 kWh/m\u00B2)</string>
-    <string name="old">Old Building\n(120/365 kWh/m\u00B2)</string>
-    <string name="minergie">Minergie\n(38/365 kWh/m\u00B2)</string>
-    <string name="p">Minergie P\n(30/365 kWh/m\u00B2)</string>
-    <string name="a">Minergie A\n(0 kWh/m\u00B2)</string>
+    <string name="recent">New Building</string>
+    <string name="renovated">Renovated</string>
+    <string name="old">Old Building</string>
+    <string name="minergie">Minergie</string>
+    <string name="p">Minergie P</string>
+    <string name="a">Minergie A</string>
 
     <string-array name="preference_array_age_entries">
         <item>@string/recent</item>
@@ -204,14 +204,14 @@
     <string name="pref_title_diet_type">Diet Type</string>
     <string name="pref_summary_diet_type">Choose the diet type that best fits you.</string>
 
-    <string name="meet_lover">Meet Lover</string>
+    <string name="meat_lover">Meat Lover</string>
     <string name="average">Average</string>
     <string name="no_beef">No Beef</string>
     <string name="vegetarian">Vegetarian</string>
     <string name="vegan">Vegan</string>
 
     <string-array name="preference_array_diet_type_entries">
-        <item>@string/meet_lover</item>
+        <item>@string/meat_lover</item>
         <item>@string/average</item>
         <item>@string/no_beef</item>
         <item>@string/vegetarian</item>
@@ -324,10 +324,10 @@
         "Thank you for using our SmartEnergy App!\n\n"
 
         "By using this App, you help to improve your environment."
-        "Our app tells you how much CO2 you produce in your daily life."
-        "We focused on detecting which traffics you use and calculate your CO2 and aggregate it on a daily basis.\n\n"
+        "Our app tells you how much CO\u2082 you produce in your daily life."
+        "We focused on detecting which traffics you use and calculate your CO\u2082 and aggregate it on a daily basis.\n\n"
 
-        "The CO2 values are so high! How can I reduce my carbon footprint?\n\n"
+        "The CO\u2082 values are so high! How can I reduce my carbon footprint?\n\n"
 
         "Try to live your life a bit greener! Use public transport instead of using your car."
         "Instead of using public transport, why not use your bicycle? \n\n"

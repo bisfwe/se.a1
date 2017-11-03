@@ -53,7 +53,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static final int TRANSPORTATION_PETROL = 1;
     public static final int TRANSPORTATION_DIESEL = 2;
 
-    public static final int LIFESTYLE_MEET_LOVER = 1;
+    public static final int LIFESTYLE_MEAT_LOVER = 1;
     public static final int LIFESTYLE_AVERAGE = 2;
     public static final int LIFESTYLE_NO_BEEF = 3;
     public static final int LIFESTYLE_VEGETARIAN = 4;
@@ -85,13 +85,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static SwitchPreference knowsArea;
     private static EditTextPreference exactArea;
     private static ListPreference area;
-
-
-    public enum CarType {TRANSPORTATION_SMALL_CAR, TRANSPORTATION_MEDIUM_CAR, TRANSPORTATION_BIG_CAR}
-
-    public enum FuelType {TRANSPORTATION_PETROL, TRANSPORTATION_DIESEL}
-
-    public enum DietType {LIFESTYLE_MEET_LOVER, LIFESTYLE_AVERAGE, LIFESTYLE_NO_BEEF, LIFESTYLE_VEGETARIAN, LIFESTYLE_VEGAN}
 
     /**
      * A preference value change listener that updates the preference's summary

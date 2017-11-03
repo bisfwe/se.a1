@@ -42,7 +42,7 @@
             android:id="@+id/radio_meet_lover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/meet_lover" />
+            android:text="@string/meat_lover" />
 
         <RadioButton
             android:textColor="@color/white"

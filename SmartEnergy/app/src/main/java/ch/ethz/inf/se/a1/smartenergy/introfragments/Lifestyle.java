@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
@@ -42,7 +41,7 @@ public class Lifestyle extends Fragment implements ISlideBackgroundColorHolder {
         // get settings to display radio buttons
         String lifestyle = pref.getString(getString(R.string.pref_key_diet_type), Integer.toString(SettingsActivity.LIFESTYLE_AVERAGE));
         switch (Integer.parseInt(lifestyle)) {
-            case SettingsActivity.LIFESTYLE_MEET_LOVER:
+            case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 ((RadioButton) view.findViewById(R.id.radio_meet_lover)).toggle();
                 break;
             case SettingsActivity.LIFESTYLE_NO_BEEF:
