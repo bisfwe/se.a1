@@ -33,7 +33,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name="IntroActivity"
+            android:name=".IntroActivity"
             android:label="@string/title_activity_intro" />
 
         <service
@@ -49,7 +49,16 @@
             android:name=".DetectedActivitiesIntentService"
             android:exported="false" />
 
-        <activity android:name=".GraphActivity"></activity>
+        <activity android:name=".GraphActivity" />
+        <activity
+            android:name=".InfoActivity"
+            android:label="@string/title_activity_info"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.ethz.inf.se.a1.smartenergy.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

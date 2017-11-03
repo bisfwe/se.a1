@@ -319,4 +319,37 @@
     <string name="activity_updates_not_removed">Failed to remove activity updates</string>
 
     <string name="percent">%1$d%%</string>
+    <string name="title_activity_info">Info and FAQ</string>
+    <string name="large_text">
+        "Thank you for using our SmartEnergy App!\n\n"
+
+        "By using this App, you help to improve your environment."
+        "Our app tells you how much CO2 you produce in your daily life."
+        "We focused on detecting which traffics you use and calculate your CO2 and aggregate it on a daily basis.\n\n"
+
+        "The CO2 values are so high! How can I reduce my carbon footprint?\n\n"
+
+        "Try to live your life a bit greener! Use public transport instead of using your car."
+        "Instead of using public transport, why not use your bicycle? \n\n"
+
+        "How does it know which transports I use?\n\n"
+
+        "We frequently log your GPS location. Based on that location, we can look for public transport stations in your vicinity."
+        "A clever algorithm also detects how you move your phone. For example if your phone goes up and down a lot, you are probably walking or running."
+        "Based on this gathered data, we can calculate for how long you used which mode of transport."
+        "Isn't this exciting? Tell your friends! \n\n "
+
+        "Want to contact us or do you need support?\n\n"
+
+        "Use the red mail button above which will automatically transfer to your preffered Mail application."
+        "Tell us what you like or what you think we should still improve!\n\n"
+
+        "What about my data privacy?\n\n"
+
+        "We are glad you asked! Your data is safe with us."
+        "All the data stays on your device. The only time we connect to the Internet is when we want to look for public transport stations in your vicinity."
+
+        "\n\n\n"
+
+    </string>
 </resources>

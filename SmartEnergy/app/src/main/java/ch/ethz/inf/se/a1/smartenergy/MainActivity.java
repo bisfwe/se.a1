@@ -24,8 +24,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -186,12 +184,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_info) {
-            // got to list view
-            /*Intent intent = new Intent(this, GraphActivity.class);
-            String message = "Graph activity";
-            intent.putExtra(EXTRA_MESSAGE, message);
+
+            Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
-            */
+
 
         } else if (id == R.id.nav_tutorial) {
 
