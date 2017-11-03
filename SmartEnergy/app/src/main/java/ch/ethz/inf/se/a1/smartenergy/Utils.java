@@ -78,4 +78,13 @@ public class Utils {
     static double veganCycling = 33.99982726;
     static double veganRunning = 45.14054736;
 
+    static double co2Tramway = 1.16509434;
+    static double co2Petrol = 2336.238005;
+    static double co2Diesel = 2769.422527;
+
+    static double fuelConsumptionSmall = 4;
+    static double fuelConsumptionMedium = 8;
+    static double fuelConsumptionBig = 15;
+
+
 }

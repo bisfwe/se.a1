@@ -24,9 +24,13 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity
             Manifest.permission.ACCESS_FINE_LOCATION,
     };
     private static final int INITIAL_REQUEST=1337;
+    private static final boolean dummyData = false;
 
     private Context mContext;
     private ListView mListView;
@@ -47,6 +52,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         mContext = this;
+        // TODO remove this shit ;)
+        if (dummyData){
+            SharedPreferences sharedPrefs = getDefaultSharedPreferences(mContext);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+
+            //save it forever
+            editor.putString(Constants.UPDATE_STORE_TAG, "[{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.381692,\"longitude\":8.571583,\"timeInMillies\":1509550903896},{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.376618,\"longitude\":8.548713,\"timeInMillies\":1509551683000},{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.372726,\"longitude\":8.601083,\"timeInMillies\":1509616843000},{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.337563,\"longitude\":8.673575,\"timeInMillies\":1509618960000}]");
+            editor.commit();
+        }
+
+
+
+
         // Show intro the very first time the app is opened
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         if (!pref.getBoolean("introDone", false)) {
@@ -61,6 +79,11 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
+        // ListView displaying stats
+        mListView = (ListView) findViewById(R.id.stats_list_view);
+        allUpdatesToDays();
+        final DayAdapter adapter = new DayAdapter(this, days);
+        mListView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,6 +95,7 @@ public class MainActivity extends AppCompatActivity
 
                 //TODO: place this somewhere better and update frequently
                 allUpdatesToDays();
+                adapter.notifyDataSetChanged();
                 for (Day d : days) {
                     Toast.makeText(mContext,
                             String.format ("Total Co2 on this day: %f", d.getTotalCo2()),
@@ -83,14 +107,6 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
-        // ListView displaying stats
-
-        mListView = (ListView) findViewById(R.id.stats_list_view);
-
-        allUpdatesToDays();
-        DayAdapter adapter = new DayAdapter(this, days);
-        mListView.setAdapter(adapter);
 
         // Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -221,11 +237,6 @@ public class MainActivity extends AppCompatActivity
      * DetectedActivities with new {@code DetectedActivity} objects reflecting the latest detected
      * activities.
      */
-
-    public void showGraphView(View view){
-        Intent intent = new Intent(this, GraphActivity.class);
-        startActivity(intent);
-    }
 
     //populates the local object days with all recorded updates ever
     private void allUpdatesToDays() {

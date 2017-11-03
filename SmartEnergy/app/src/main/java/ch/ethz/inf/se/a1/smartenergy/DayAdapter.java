@@ -7,6 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 /**
@@ -51,9 +56,13 @@ public class DayAdapter extends BaseAdapter {
         TextView subtitleTextView = (TextView) rowView.findViewById(R.id.day_list_subtitle);
 
         Day day = (Day) getItem(position);
-        String dayString = android.text.format.DateFormat.format("EEEE", day.date).toString(); // TODO: handle nullpointer on day. (happened the first time i opened the app)
+        DateTimeZone timeZone = DateTimeZone.forID( "Europe/Paris" );
+        DateTime dateTime = new DateTime( day.date, timeZone );
+        int dayOfWeekNumber = dateTime.getDayOfWeek(); // ISO 8601 standard says Monday is 1.
+        DateTimeFormatter formatter = DateTimeFormat.forPattern( "EEEE" ).withLocale( java.util.Locale.ENGLISH );
+        String dayOfWeekName = formatter.print( dateTime );
 
-        titleTextView.setText(dayString);
+        titleTextView.setText(dayOfWeekName);
         subtitleTextView.setText("Total amount of CO2: " + day.getTotalCo2());
         return rowView;
     }
