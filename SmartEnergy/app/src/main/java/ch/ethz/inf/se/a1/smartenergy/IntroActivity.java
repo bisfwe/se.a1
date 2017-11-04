@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.ViewGroup;
 
-import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
+
+import java.util.Set;
 
 import ch.ethz.inf.se.a1.smartenergy.introfragments.CarUsage;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.HeatingType;
@@ -19,12 +22,17 @@ import ch.ethz.inf.se.a1.smartenergy.introfragments.Lifestyle;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.LivingArea;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.TransportationModes;
 
+import static ch.ethz.inf.se.a1.smartenergy.SettingsActivity.TRANSPORTATION_CAR;
+
 /**
  * This is an activity for the intro slides which also request the required permissions.
  * This intro is only shown a single time (the first time the app is opened).
  */
 
 public class IntroActivity extends AppIntro2 {
+
+    private final static String TAG = "IntroActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,5 +85,24 @@ public class IntroActivity extends AppIntro2 {
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
+        Log.i(TAG, "slide change");
+
+        // skip car usage slide if the user does not drive cars
+        if (newFragment != null && newFragment.toString().startsWith(CarUsage.class.getName().substring(45))) {
+            // car usage slide is accessed
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+            Set transportationModes = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
+
+            if (transportationModes != null && !transportationModes.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
+                // the user is not driving cars
+                if (oldFragment.toString().startsWith(TransportationModes.class.getName().substring(45))) {
+                    // coming from left
+                    ((ViewGroup) getSlides().get(5).getView().getParent().getParent()).findViewById(R.id.next).performClick();
+                } else if (oldFragment.toString().startsWith(Lifestyle.class.getName().substring(45))) {
+                    // coming from right
+                    onBackPressed();
+                }
+            }
+        }
     }
 }

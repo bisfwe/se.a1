@@ -1,35 +1,23 @@
 package ch.ethz.inf.se.a1.smartenergy.introfragments;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import ch.ethz.inf.se.a1.smartenergy.R;
 import ch.ethz.inf.se.a1.smartenergy.SettingsActivity;
-
-import static ch.ethz.inf.se.a1.smartenergy.SettingsActivity.TRANSPORTATION_CAR;
 
 public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
 
@@ -53,13 +41,6 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.car_usage, container, false);
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-
-        Set transportationModes = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
-        if (transportationModes != null && !transportationModes.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
-            // TODO: skip slide, but how?
-            Log.i(TAG, "should skip slide");
-        }
-
         ed = pref.edit();
 
         // get fuel consumption value and set it
@@ -70,10 +51,12 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
         // write value to settings if changed
         fuelUsage.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
