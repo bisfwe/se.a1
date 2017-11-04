@@ -34,7 +34,7 @@ public class HouseType extends Fragment implements ISlideBackgroundColorHolder {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.house_type, container, false);
+        view = inflater.inflate(R.layout.fragment_house_type, container, false);
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 

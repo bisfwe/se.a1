@@ -39,7 +39,7 @@ public class CarUsage extends Fragment implements ISlideBackgroundColorHolder {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.car_usage, container, false);
+        view = inflater.inflate(R.layout.fragment_car_usage, container, false);
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 

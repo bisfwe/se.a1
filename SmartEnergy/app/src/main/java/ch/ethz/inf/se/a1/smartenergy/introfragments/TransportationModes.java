@@ -40,7 +40,7 @@ public class TransportationModes extends Fragment implements ISlideBackgroundCol
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.transportation_modes, container, false);
+        view = inflater.inflate(R.layout.fragment_transportation_modes, container, false);
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 

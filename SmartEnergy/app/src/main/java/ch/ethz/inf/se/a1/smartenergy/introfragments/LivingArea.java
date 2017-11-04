@@ -38,7 +38,7 @@ public class LivingArea extends Fragment implements ISlideBackgroundColorHolder 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.living_area, container, false);
+        view = inflater.inflate(R.layout.fragment_living_area, container, false);
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 
