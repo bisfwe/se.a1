@@ -86,5 +86,12 @@ public class Utils {
     static double fuelConsumptionMedium = 8;
     static double fuelConsumptionBig = 15;
 
+    static double energyWalking = 0.01;
+    static double energyCycling = 0.025;
+    static double energyRunning = 0.032;
+
+    static double energyTram = 0.089622642;
+    static double energyPetrol = 9.602229904;
+    static double energyDiesel = 11.09334221;
 
 }

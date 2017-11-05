@@ -34,6 +34,7 @@ public class Aktivitaet {
     private double redCo2;
     // co2 produced by public transport, these are displayed in a graph in the list view. not implemented yet..
     private double yellowCo2;
+    private double energyUsed;
     private Context context;
     private RequestQueue mQueue;
     RequestQueue mRequestQueue;
@@ -54,7 +55,6 @@ public class Aktivitaet {
         end = second.getLocation();
         detectedActivityType = first.getActivityType();
         co2produced = calculateCo2();
-
     }
 
     private double calculateCo2() {
@@ -143,6 +143,7 @@ public class Aktivitaet {
                 result += Utils.averageCycling/1000 * metersTravelled;
         }
         greenCo2 += result;
+        energyUsed = (metersTravelled/1000) * Utils.energyCycling;
         return result;
     }
     private double co2Walking(){
@@ -168,6 +169,7 @@ public class Aktivitaet {
                 result += Utils.averageWalking/1000 * metersTravelled;
         }
         greenCo2 += result;
+        energyUsed = (metersTravelled/1000) * Utils.energyWalking;
         return result;
     }
 
@@ -190,27 +192,32 @@ public class Aktivitaet {
                 result += Utils.averageRunning/1000 * metersTravelled;
         }
         greenCo2 += result;
+        energyUsed = (metersTravelled/1000) * Utils.energyRunning;
         return result;
     }
 
     private double co2Tram(){
         double result = metersTravelled/1000 * Utils.co2Tramway;
         yellowCo2 += result;
+        energyUsed = (metersTravelled/1000) * Utils.energyTram;
         return result;
     }
 
     private double co2Car(){
         double result;
+        double energy;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean knowsUsage = pref.getBoolean(context.getString(R.string.pref_key_knows_usage),false);
         int fuelType = Integer.valueOf(pref.getString(context.getString(R.string.pref_key_fuel_type), String.valueOf(SettingsActivity.TRANSPORTATION_PETROL)));
         if (knowsUsage){
             double fuelConsumption = Double.valueOf(pref.getString(context.getString(R.string.pref_key_usage), "0.0"));
+            double liters = metersTravelled*fuelConsumption/100000;
             if (fuelType == SettingsActivity.TRANSPORTATION_PETROL){
-                double liters = metersTravelled*fuelConsumption/100000;
                 result = liters * Utils.co2Petrol;
+                energy = liters * Utils.energyPetrol;
             } else {
-                result = metersTravelled*fuelConsumption/100000*Utils.co2Diesel;
+                result = liters * Utils.co2Diesel;
+                energy = liters * Utils.energyDiesel;
             }
         } else {
             double liters = 0.0;
@@ -226,12 +233,15 @@ public class Aktivitaet {
                     liters = metersTravelled*Utils.fuelConsumptionMedium/100000;
             }
             if (fuelType == SettingsActivity.TRANSPORTATION_PETROL){
-                result = liters*Utils.co2Petrol;
+                result = liters * Utils.co2Petrol;
+                energy = liters * Utils.energyPetrol;
             } else {
-                result = liters*Utils.co2Diesel;
+                result = liters* Utils.co2Diesel;
+                energy = liters * Utils.energyDiesel;
             }
         }
         redCo2 += result;
+        energyUsed = energy;
         return result;
     }
 
@@ -267,4 +277,5 @@ public class Aktivitaet {
     public double getGreenCo2() { return greenCo2; }
     public double getRedCo2() { return redCo2; }
     public double getYellowCo2() { return yellowCo2; }
+    public double getEnergyUsed() { return energyUsed; }
 }

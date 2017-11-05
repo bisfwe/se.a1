@@ -96,6 +96,11 @@ public class Day {
         return total;
     }
 
-
-
+    public double getTotalEnergy() {
+        double total = 0.0;
+        for (Aktivitaet a : aktivitaetenList) {
+            total += a.getEnergyUsed();
+        }
+        return total;
+    }
 }

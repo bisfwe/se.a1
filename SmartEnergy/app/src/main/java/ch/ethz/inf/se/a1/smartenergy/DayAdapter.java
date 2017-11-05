@@ -11,10 +11,8 @@ import android.widget.TextView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -63,6 +61,7 @@ public class DayAdapter extends BaseAdapter {
 
         // Get subtitle element
         TextView subtitleTextView = (TextView) rowView.findViewById(R.id.day_list_subtitle);
+        TextView subEnergyTextView = (TextView) rowView.findViewById(R.id.day_list_subEnergy);
 
         Day day = (Day) getItem(position);
         DateTimeZone timeZone = DateTimeZone.forID( "Europe/Paris" );
@@ -72,7 +71,9 @@ public class DayAdapter extends BaseAdapter {
         String dayOfWeekName = formatter.print( dateTime );
 
         titleTextView.setText(dayOfWeekName);
-        subtitleTextView.setText("Total amount of CO2: " + Double.valueOf(day.getTotalCo2()).intValue() + " kg");
+        subtitleTextView.setText("Carbon footprint: " + Double.valueOf(day.getTotalCo2()).intValue() + " kg");
+        subEnergyTextView.setText("Energy used: " + Double.valueOf(day.getTotalEnergy()).intValue() + " kW/h");
+
         GraphView graph = (GraphView) rowView.findViewById(R.id.graph);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, day.getTotalGreenCo2()),
@@ -101,7 +102,6 @@ public class DayAdapter extends BaseAdapter {
         grid.setVerticalLabelsVisible(false);
         grid.setHighlightZeroLines(false);
         graph.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.NONE );
-
 
         return rowView;
     }

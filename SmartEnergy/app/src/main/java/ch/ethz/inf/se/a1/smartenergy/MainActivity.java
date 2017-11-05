@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity
             editor.commit();
         }
 
-
-
-
         // Show intro the very first time the app is opened
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         if (!pref.getBoolean("introDone", false)) {
