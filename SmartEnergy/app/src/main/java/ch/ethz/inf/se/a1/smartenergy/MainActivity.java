@@ -22,7 +22,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity
 
     private Context mContext;
     private ListView mListView;
+    private TextView mHeatingCo2;
 
     private ArrayList<Day> days;
 
@@ -80,6 +84,12 @@ public class MainActivity extends AppCompatActivity
         final DayAdapter adapter = new DayAdapter(this, days);
         mListView.setAdapter(adapter);
 
+        //add heating information
+        double heatingCo2 = calculateHeating();
+        mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
+        mHeatingCo2.setText("Carbon emmited by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
+        // TODO add used energy for heating...
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -92,13 +102,9 @@ public class MainActivity extends AppCompatActivity
                 allUpdatesToDays();
                 adapter.notifyDataSetChanged();
                 for (Day d : days) {
-                    Toast.makeText(mContext,
-                            String.format ("Total Co2 on this day: %f", d.getTotalCo2()),
-                            Toast.LENGTH_SHORT)
-                            .show();
                 }
 
-                Snackbar.make(view, "Populating days... ", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Populating days... ", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
@@ -268,6 +274,57 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    // computes the heating stuff
+    private double calculateHeating(){
+        double result = 0.0;
+        double houseFactor;
+        double heatingFactor;
+        SharedPreferences pref = getDefaultSharedPreferences(mContext);
+        String houseType = pref.getString(getString(R.string.pref_key_age), Integer.toString(SettingsActivity.HOME_RENOVATED));
+        switch (Integer.parseInt(houseType)) {
+            case SettingsActivity.HOME_NEW:
+                houseFactor = Utils.newBuilding;
+                break;
+            case SettingsActivity.HOME_OLD:
+                houseFactor = Utils.oldBuilding;
+                break;
+            case SettingsActivity.HOME_MINERGIE:
+                houseFactor = Utils.minergie;
+                break;
+            case SettingsActivity.HOME_P:
+                houseFactor = Utils.minergieP;
+                break;
+            case SettingsActivity.HOME_A:
+                houseFactor = Utils.minergieA;
+                break;
+            default:
+                houseFactor = Utils.renovatedBuilding;
+                break;
+        }
+        String heatingType = pref.getString(getString(R.string.pref_key_heating_type), Integer.toString(SettingsActivity.HOME_OIL));
+        switch (Integer.parseInt(heatingType)) {
+            case SettingsActivity.HOME_GAS:
+                heatingFactor = Utils.co2Gas;
+                break;
+            case SettingsActivity.HOME_ELECTRIC:
+                heatingFactor = Utils.co2Electric;
+                break;
+            case SettingsActivity.HOME_AIR:
+                heatingFactor = Utils.co2AirPump;
+                break;
+            case SettingsActivity.HOME_GROUND:
+                heatingFactor = Utils.co2GroundPump;
+                break;
+            default:
+                heatingFactor = Utils.co2Oil;
+        }
+        String areaUsage = pref.getString(getString(R.string.pref_key_exact_area), "80");
+        double area = Double.valueOf(areaUsage);
+        result = area*heatingFactor*houseFactor;
+        return result;
+
+    }
+
     private boolean canAccessLocation() {
         return(hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
     }
@@ -288,10 +345,4 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // Creates dummy data
-    public ArrayList<Day> createDummyData(){
-        ArrayList<Day> result = new ArrayList<Day>();
-        return result;
-
-    }
 }

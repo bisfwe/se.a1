@@ -94,4 +94,16 @@ public class Utils {
     static double energyPetrol = 9.602229904;
     static double energyDiesel = 11.09334221;
 
+    static double newBuilding = 0.131506849315068;
+    static double renovatedBuilding = 0.246575342465753;
+    static double oldBuilding = 0.328767123287671;
+    static double minergie = 0.104109589041096;
+    static double minergieP = 0.082191780821918;
+    static double minergieA = 0;
+
+    static double co2Oil = 430;
+    static double co2Gas = 295;
+    static double co2Electric = 370;
+    static double co2AirPump = 120;
+    static double co2GroundPump = 130;
 }
