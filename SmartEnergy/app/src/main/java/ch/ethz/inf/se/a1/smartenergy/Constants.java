@@ -19,7 +19,7 @@ package ch.ethz.inf.se.a1.smartenergy;
 import com.google.android.gms.location.DetectedActivity;
 
 /**
- * Constants used in this sample.
+ * Constants used for the recognition of the means of transport.
  */
 final class Constants {
 

@@ -20,15 +20,35 @@ import java.util.Set;
 import ch.ethz.inf.se.a1.smartenergy.R;
 import ch.ethz.inf.se.a1.smartenergy.SettingsActivity;
 
+/**
+ * fragment used in an intro slide asking the user for means of transportation preferences
+ */
 public class TransportationModes extends Fragment implements ISlideBackgroundColorHolder {
 
+    /**
+     * tag for logging
+     */
     private final static String TAG = "TransportationModes";
 
+    /**
+     * view holding the elements of this fragment
+     */
     View view;
 
+    /**
+     * shared preferences
+     */
     SharedPreferences pref;
+
+    /**
+     * editor for shared preferences
+     */
     SharedPreferences.Editor ed;
 
+    /**
+     * a set containing the means of transport a user uses
+     * used as a copy of the original set and to write them as a new set to the settings
+     */
     Set<String> selectionsCopy = new HashSet<>();
 
     @Override
@@ -44,6 +64,7 @@ public class TransportationModes extends Fragment implements ISlideBackgroundCol
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         ed = pref.edit();
 
+        // get settings to display check boxes accordingly
         Set<String> selections = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
         if (selections != null) {
             selectionsCopy.addAll(selections);
@@ -73,6 +94,7 @@ public class TransportationModes extends Fragment implements ISlideBackgroundCol
             Log.d(TAG, "nothing selected");
         }
 
+        // add listeners to the check boxes to set settings if toggled
         ((CheckBox) view.findViewById(R.id.checkBoxAirplane)).setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override

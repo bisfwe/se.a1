@@ -98,8 +98,8 @@
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_fuel_type_values">
-        <item>1</item>
-        <item>2</item>
+        <item>@string/one</item>
+        <item>@string/two</item>
     </string-array>
     <string name="preference_fuel_type_values_default">1</string>
 
@@ -198,6 +198,7 @@
     </string-array>
     <string name="preference_age_values_default">2</string>
 
+
     <!-- Category Lifestyle -->
     <string name="pref_header_lifestyle">Lifestyle</string>
     <string name="pref_key_diet_type">diet_type_key</string>
@@ -226,6 +227,7 @@
         <item>@string/five</item>
     </string-array>
     <string name="preference_diet_type_values_default">2</string>
+
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
