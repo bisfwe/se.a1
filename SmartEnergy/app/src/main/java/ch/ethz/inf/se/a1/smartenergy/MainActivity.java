@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
             Manifest.permission.ACCESS_FINE_LOCATION,
     };
     private static final int INITIAL_REQUEST=1337;
-    private static final boolean dummyData = true;
+    private static final boolean dummyData = false;
 
     private Context mContext;
     private ListView mListView;
