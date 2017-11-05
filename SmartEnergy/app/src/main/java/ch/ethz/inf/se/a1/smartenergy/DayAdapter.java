@@ -1,11 +1,20 @@
 package ch.ethz.inf.se.a1.smartenergy;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -63,7 +72,37 @@ public class DayAdapter extends BaseAdapter {
         String dayOfWeekName = formatter.print( dateTime );
 
         titleTextView.setText(dayOfWeekName);
-        subtitleTextView.setText("Total amount of CO2: " + day.getTotalCo2());
+        subtitleTextView.setText("Total amount of CO2: " + Double.valueOf(day.getTotalCo2()).intValue() + " kg");
+        GraphView graph = (GraphView) rowView.findViewById(R.id.graph);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, day.getTotalGreenCo2()),
+                new DataPoint(1, day.getTotalYellowCo2()),
+                new DataPoint(2, day.getTotalRedCo2()),
+        });
+        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                int x = (int) data.getX();
+                switch (x){
+                    case 0:
+                        return Color.rgb(59, 175, 71);
+                    case 1:
+                        return Color.rgb(249, 237, 4);
+                    case 2:
+                        return Color.rgb(255, 0, 55);
+                    default: return Color.rgb(96, 2, 204);
+                }
+            }
+        });
+        series.setSpacing(10);
+        graph.addSeries(series);
+        GridLabelRenderer grid = graph.getGridLabelRenderer();
+        grid.setHorizontalLabelsVisible(false);
+        grid.setVerticalLabelsVisible(false);
+        grid.setHighlightZeroLines(false);
+        graph.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.NONE );
+
+
         return rowView;
     }
 

@@ -81,11 +81,14 @@ public class Aktivitaet {
     }
     // TODO calculate co2 for planes (activity probably unknown but mean speed rather high
 
-    private void determineTransportation(){
+    private double determineTransportation(){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         Set<String> selections = pref.getStringSet(context.getString(R.string.pref_key_used_transportation), null);
-        // check for tram or train
-        if (selections.contains("2")){
+        if (selections.size() <= 0){
+            return 0.0;
+        }
+        // collections contains car and tram or train, we use the transport api to determine which of them it is..
+        if (selections.contains("3") && (selections.contains("2") || selections.contains("4"))){
             String url = "http://transport.opendata.ch/v1/locations?x=" + start.getLongitude() + "&y=" + start.getLatitude();
 
             RequestQueue queue = Volley.newRequestQueue(context);
@@ -106,16 +109,25 @@ public class Aktivitaet {
                         }
                     }
             );
-
-// add it to the RequestQueue
+            // add it to the RequestQueue, response is handled by handleResponse()
             queue.add(getRequest);
+            return 0.0;
+        } else if (!selections.contains("3") && (selections.contains("2") || selections.contains(("4")))){
+            // only public transport selected, can be computed directly
+            this.transportationMode = 1;
+            return co2Tram();
+        } else if(selections.contains("3") && !(selections.contains("2") || selections.contains(("4")))){
+            // only car selcted, no public transport
+            this.transportationMode = 2;
+            return co2Car();
         }
+        return 0.0;
     }
 
     private double co2Bicycle(){
         double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        int lifestyle = pref.getInt("pref_lifestyle", 2);
+        int lifestyle = Integer.valueOf(pref.getString("pref_lifestyle", String.valueOf(2)));
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatLoverCycling/1000 * metersTravelled;
@@ -136,7 +148,7 @@ public class Aktivitaet {
     private double co2Walking(){
         double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        int lifestyle = pref.getInt("pref_lifestyle", 2);
+        int lifestyle = Integer.valueOf(pref.getString("pref_lifestyle", String.valueOf(2)));
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatLoverWalking/1000 * metersTravelled;
@@ -162,7 +174,7 @@ public class Aktivitaet {
     private double co2Running(){
         double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        int lifestyle = pref.getInt("pref_lifestyle", 2);
+        int lifestyle = Integer.valueOf(pref.getString("pref_lifestyle", String.valueOf(2)));
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatloverRunning/1000 * metersTravelled;
@@ -191,10 +203,7 @@ public class Aktivitaet {
         double result;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean knowsUsage = pref.getBoolean(context.getString(R.string.pref_key_knows_usage),false);
-        //int fuelType = pref.getInt(context.getString(R.string.pref_key_fuel_type), SettingsActivity.TRANSPORTATION_PETROL);
-        //quick fix.
-        //TODO: check what went wrong here
-        int fuelType = SettingsActivity.TRANSPORTATION_PETROL;
+        int fuelType = Integer.valueOf(pref.getString(context.getString(R.string.pref_key_fuel_type), String.valueOf(SettingsActivity.TRANSPORTATION_PETROL)));
         if (knowsUsage){
             double fuelConsumption = Double.valueOf(pref.getString(context.getString(R.string.pref_key_usage), "0.0"));
             if (fuelType == SettingsActivity.TRANSPORTATION_PETROL){
@@ -205,7 +214,7 @@ public class Aktivitaet {
             }
         } else {
             double liters = 0.0;
-            int carType = pref.getInt(context.getString(R.string.pref_key_car_type), SettingsActivity.TRANSPORTATION_MEDIUM_CAR);
+            int carType = Integer.valueOf(pref.getString(context.getString(R.string.pref_key_car_type), String.valueOf(SettingsActivity.TRANSPORTATION_MEDIUM_CAR)));
             switch (carType) {
                 case SettingsActivity.TRANSPORTATION_SMALL_CAR:
                     liters = metersTravelled*Utils.fuelConsumptionSmall/100000;
@@ -255,4 +264,7 @@ public class Aktivitaet {
     public double getCo2produced() {
         return co2produced;
     }
+    public double getGreenCo2() { return greenCo2; }
+    public double getRedCo2() { return redCo2; }
+    public double getYellowCo2() { return yellowCo2; }
 }

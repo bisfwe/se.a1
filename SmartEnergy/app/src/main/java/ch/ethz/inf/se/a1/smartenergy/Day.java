@@ -72,4 +72,30 @@ public class Day {
         return total;
     }
 
+    public double getTotalGreenCo2() {
+        double total = 0.0;
+        for (Aktivitaet a : aktivitaetenList) {
+            total += a.getGreenCo2();
+        }
+        return total;
+    }
+
+    public double getTotalYellowCo2() {
+        double total = 0.0;
+        for (Aktivitaet a : aktivitaetenList) {
+            total += a.getYellowCo2();
+        }
+        return total;
+    }
+
+    public double getTotalRedCo2() {
+        double total = 0.0;
+        for (Aktivitaet a : aktivitaetenList) {
+            total += a.getRedCo2();
+        }
+        return total;
+    }
+
+
+
 }
