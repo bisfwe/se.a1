@@ -16,13 +16,29 @@ import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 import ch.ethz.inf.se.a1.smartenergy.R;
 import ch.ethz.inf.se.a1.smartenergy.SettingsActivity;
 
+/**
+ * fragment used in an intro slide asking the user for his housing preferences
+ */
 public class HouseType extends Fragment implements ISlideBackgroundColorHolder {
 
+    /**
+     * tag for logging
+     */
     private final static String TAG = "HouseType";
 
+    /**
+     * view holding the elements of this fragment
+     */
     View view;
 
+    /**
+     * shared preferences
+     */
     SharedPreferences pref;
+
+    /**
+     * editor for shared preferences
+     */
     SharedPreferences.Editor ed;
 
     @Override

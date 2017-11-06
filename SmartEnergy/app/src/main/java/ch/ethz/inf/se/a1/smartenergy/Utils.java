@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * Utility methods used in this sample.
+ * Utility methods used.
  */
 public class Utils {
 

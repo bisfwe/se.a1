@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         //add heating information
         double heatingCo2 = calculateHeating();
         mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
-        mHeatingCo2.setText("Carbon emmited by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
+        mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
         // TODO add used energy for heating...
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -171,13 +171,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -27,49 +27,49 @@ import android.view.MenuItem;
 import java.util.List;
 
 /**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
+ * A {@link PreferenceActivity} that presents a set of application settings.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+    /**
+     * tag for logging
+     */
     public static final String TAG = "SettingsActivity";
 
+    // means of transportation constants
     public static final int TRANSPORTATION_AIRPLANE = 1;
     public static final int TRANSPORTATION_TRAIN = 2;
     public static final int TRANSPORTATION_CAR = 3;
     public static final int TRANSPORTATION_TRAM = 4;
     public static final int TRANSPORTATION_BICYCLE = 5;
 
+    // car-related constants
     public static final int TRANSPORTATION_SMALL_CAR = 1;
     public static final int TRANSPORTATION_MEDIUM_CAR = 2;
     public static final int TRANSPORTATION_BIG_CAR = 3;
-
     public static final int TRANSPORTATION_PETROL = 1;
     public static final int TRANSPORTATION_DIESEL = 2;
 
+    // lifestyle constants
     public static final int LIFESTYLE_MEAT_LOVER = 1;
     public static final int LIFESTYLE_AVERAGE = 2;
     public static final int LIFESTYLE_NO_BEEF = 3;
     public static final int LIFESTYLE_VEGETARIAN = 4;
     public static final int LIFESTYLE_VEGAN = 5;
 
+    // heating system constants
     public static final int HOME_OIL = 1;
     public static final int HOME_GAS = 2;
     public static final int HOME_ELECTRIC = 3;
     public static final int HOME_AIR = 4;
     public static final int HOME_GROUND = 5;
 
+    // housing size constants
     public static final int HOME_ROOM = 1;
     public static final int HOME_FLAT = 2;
     public static final int HOME_HOUSE = 3;
     public static final int HOME_VILLA = 4;
 
+    // housing energy standard constants
     public static final int HOME_NEW = 1;
     public static final int HOME_RENOVATED = 2;
     public static final int HOME_OLD = 3;
@@ -77,14 +77,25 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static final int HOME_P = 5;
     public static final int HOME_A = 6;
 
-
+    /**
+     * selection list containing information about the used modes of transportation
+     */
     private static MultiSelectListPreference usedTransportation;
-    private static ListPreference carType, fuelType;
+
+    /**
+     * list preferences telling which option the user has chosen
+     */
+    private static ListPreference carType, fuelType, area;
+
+    /**
+     * text preferences for specific values if the user knows them
+     */
+    private static EditTextPreference usage, exactArea;
+
+    /**
+     * boolean saying whether the user knows the fuel usage of his car
+     */
     private static SwitchPreference knowsUsage;
-    private static EditTextPreference usage;
-    private static SwitchPreference knowsArea;
-    private static EditTextPreference exactArea;
-    private static ListPreference area;
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -94,7 +105,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
-
 
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
@@ -244,10 +254,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             fuelType = (ListPreference) findPreference(getString(R.string.pref_key_fuel_type));
             knowsUsage = (SwitchPreference) findPreference(getString(R.string.pref_key_knows_usage));
             usage = (EditTextPreference) findPreference((getString(R.string.pref_key_usage)));
-            knowsArea = (SwitchPreference) findPreference(getString(R.string.pref_key_knows_area));
+            SwitchPreference knowsArea = (SwitchPreference) findPreference(getString(R.string.pref_key_knows_area));
             exactArea = (EditTextPreference) findPreference((getString(R.string.pref_key_exact_area)));
             area = (ListPreference) findPreference(getString(R.string.pref_key_area));
 
+            // set visibility of the settings according to the super settings on which they depend
             if (usedTransportation.getValues().contains(Integer.toString(TRANSPORTATION_CAR))) {
                 carType.setEnabled(true);
                 fuelType.setEnabled(true);

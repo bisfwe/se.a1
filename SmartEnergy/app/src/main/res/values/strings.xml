@@ -11,6 +11,8 @@
     <!-- Strings related to Settings and Intro -->
     <!-- Intro only -->
     <string name="welcome">Hello, welcome to Smart Energy. This app starts a service in the background that keeps track of information related to your carbon dioxide footprint.</string>
+    <string name="howItWorks">For every day, the app will present you the energy usage and its corresponding CO\u2082 emissions. The higher a bar, the more emissions you caused. The bars stand for emissions caused by walking (you must eat food for this), using public transportation and driving a car, respectively.</string>
+    <!-- Alternative (too long): The red bar stands for emissions caused by car driving, the yellow bar represents the emissions produced by public transportation you used and the green bar accumulates emissions you created by walking and similar for which you need to eat. -->
     <string name="permission_storage">In order to store the logged data, please allow access to the storage system. Otherwise, the app cannot work.</string>
     <string name="permission_location">In order to get your position, the app needs location access.</string>
     <string name="permission_internet">Giving you the most accurate transportation mode classifications, the app needs internet access.</string>
@@ -98,8 +100,8 @@
     </string-array>
     <!-- The following values correspond to @SettingsActivity.java constants defined on top -->
     <string-array name="preference_array_fuel_type_values">
-        <item>1</item>
-        <item>2</item>
+        <item>@string/one</item>
+        <item>@string/two</item>
     </string-array>
     <string name="preference_fuel_type_values_default">1</string>
 
@@ -198,6 +200,7 @@
     </string-array>
     <string name="preference_age_values_default">2</string>
 
+
     <!-- Category Lifestyle -->
     <string name="pref_header_lifestyle">Lifestyle</string>
     <string name="pref_key_diet_type">diet_type_key</string>
@@ -226,6 +229,7 @@
         <item>@string/five</item>
     </string-array>
     <string name="preference_diet_type_values_default">2</string>
+
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>

@@ -19,7 +19,7 @@ package ch.ethz.inf.se.a1.smartenergy;
 import com.google.android.gms.location.DetectedActivity;
 
 /**
- * Constants used in this sample.
+ * Constants used for the recognition of the means of transport.
  */
 final class Constants {
 
@@ -40,7 +40,7 @@ final class Constants {
      * detections while improving battery life. A value of 0 results in activity detections at the
      * fastest possible rate.
      */
-    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 200; // as fast as possible, since we only need one per location
+    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 5000; // as fast as possible, since we only need one per location
     /**
      * List of DetectedActivity types that we monitor in this sample.
      */
