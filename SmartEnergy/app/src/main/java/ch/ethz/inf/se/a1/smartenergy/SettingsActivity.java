@@ -4,6 +4,7 @@ package ch.ethz.inf.se.a1.smartenergy;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -30,6 +31,7 @@ import java.util.List;
  * A {@link PreferenceActivity} that presents a set of application settings.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+
     /**
      * tag for logging
      */
@@ -271,7 +273,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 usage.setEnabled(false);
             }
 
-            if (knowsUsage.isChecked()){
+            if (knowsUsage.isChecked()) {
                 carType.setEnabled(false);
             } else {
                 usage.setEnabled(false);
@@ -292,7 +294,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
             });
 
-            if (knowsArea.isChecked()){
+            if (knowsArea.isChecked()) {
                 area.setEnabled(false);
             } else {
                 exactArea.setEnabled(false);
@@ -331,6 +333,49 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         fuelType.setEnabled(false);
                         knowsUsage.setEnabled(false);
                         usage.setEnabled(false);
+                    }
+                    return true;
+                }
+            });
+
+            // set listener to ListPreference to set exact area if changed
+            area.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    int index = area.findIndexOfValue(newValue.toString());
+
+                    switch (index + 1) {
+                        case HOME_ROOM:
+                            exactArea.setText("16");
+                            break;
+                        case HOME_HOUSE:
+                            exactArea.setText("180");
+                            break;
+                        case HOME_VILLA:
+                            exactArea.setText("500");
+                            break;
+                        case HOME_FLAT:
+                        default:
+                            exactArea.setText("80");
+                    }
+                    return true;
+                }
+            });
+
+            // set listener to ListPreference to set exact fuel usage if changed
+            carType.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    int index = area.findIndexOfValue(newValue.toString());
+
+                    switch (index + 1) {
+                        case TRANSPORTATION_SMALL_CAR:
+                            usage.setText("5");
+                            break;
+                        case TRANSPORTATION_BIG_CAR:
+                            usage.setText("12");
+                            break;
+                        case TRANSPORTATION_MEDIUM_CAR:
+                        default:
+                            usage.setText("8");
                     }
                     return true;
                 }

@@ -104,6 +104,14 @@ public class MainActivity extends AppCompatActivity
                 for (Day d : days) {
                 }
 
+                //add heating information
+                double heatingCo2 = calculateHeating();
+                mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
+                if (mHeatingCo2 != null) {
+                    mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
+                    // TODO add used energy for heating...
+                }
+
                 Snackbar.make(view, "Populating days... ", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
@@ -148,6 +156,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+
+        //add heating information
+        double heatingCo2 = calculateHeating();
+        mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
+        if (mHeatingCo2 != null) {
+            mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
+            // TODO add used energy for heating...
+        }
 
         /*
         if (!canAccessLocation()) {

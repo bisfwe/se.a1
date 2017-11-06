@@ -170,7 +170,7 @@
     </string-array>
     <string name="preference_area_values_default">2</string>
 
-    <string name="pref_key_age">area_key</string>
+    <string name="pref_key_age">pref_key_age</string>
     <string name="pref_title_age">Housing Type (efficiency)</string>
     <string name="pref_summary_age">Choose the type of your primary used housing in terms of efficiency</string>
 
