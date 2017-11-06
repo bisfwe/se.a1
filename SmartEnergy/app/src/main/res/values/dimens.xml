@@ -6,12 +6,6 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="wide_space">24dp</dimen>
-    <dimen name="narrow_space">8dp</dimen>
-    <dimen name="headline_text_size">24sp</dimen>
-
-    <dimen name="progress_bar_min_height">6dp</dimen>
-    <dimen name="progress_bar_top_margin">4dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 </resources>

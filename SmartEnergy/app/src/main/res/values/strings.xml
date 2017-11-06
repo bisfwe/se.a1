@@ -4,7 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_intro">Introduction</string>
 
@@ -13,7 +12,6 @@
     <string name="welcome">Hello, welcome to Smart Energy. This app starts a service in the background that keeps track of information related to your carbon dioxide footprint.</string>
     <string name="howItWorks">For every day, the app will present you the energy usage and its corresponding CO\u2082 emissions. The higher a bar, the more emissions you caused. The bars stand for emissions caused by walking (you must eat food for this), using public transportation and driving a car, respectively.</string>
     <!-- Alternative (too long): The red bar stands for emissions caused by car driving, the yellow bar represents the emissions produced by public transportation you used and the green bar accumulates emissions you created by walking and similar for which you need to eat. -->
-    <string name="permission_storage">In order to store the logged data, please allow access to the storage system. Otherwise, the app cannot work.</string>
     <string name="permission_location">In order to get your position, the app needs location access.</string>
     <string name="permission_internet">Giving you the most accurate transportation mode classifications, the app needs internet access.</string>
     <string name="going_settings">Now, we will go through a few settings on the next pages. You can also change them later by going to \"Settings\" or doing the tutorial again.</string>
@@ -58,7 +56,6 @@
 
     <string name="intro_car_usage">Specify the amount of [l/100km] your car uses or pick a given option.</string>
     <string name="pref_key_usage">pref_key_usage</string>
-    <string name="pref_title_usage">Car Fuel Usage</string>
     <string name="pref_summary_usage">How many [l/100km] my care uses</string>
 
     <string name="pref_key_car_type">car_type_key</string>
@@ -138,7 +135,6 @@
 
     <string name="intro_area">Specify how big your primary living area is or pick a given option.</string>
     <string name="pref_key_exact_area">pref_key_exact_area</string>
-    <string name="pref_title_exact_area">Size of Living Area</string>
     <string name="pref_summary_exact_area">How many square meters I am living in</string>
 
     <string name="pref_key_area">pref_key_area</string>
@@ -231,76 +227,6 @@
     <string name="preference_diet_type_values_default">2</string>
 
 
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
-
     <!-- Activity detection strings -->
     <string name="in_vehicle">In a vehicle</string>
     <string name="on_bicycle">On a bicycle</string>
@@ -312,17 +238,9 @@
     <string name="walking">Walking</string>
     <string name="unidentifiable_activity">Unidentifiable activity: %1$d</string>
 
-    <string name="detected_activities_title">Detected Activities</string>
-
-    <string name="request_activity_updates">Request updates</string>
-    <string name="remove_activity_updates">Remove updates</string>
-
     <string name="activity_updates_enabled">Activity updates enabled</string>
     <string name="activity_updates_not_enabled">Failed to enable activity updates</string>
-    <string name="activity_updates_removed">Activity updates removed</string>
-    <string name="activity_updates_not_removed">Failed to remove activity updates</string>
 
-    <string name="percent">%1$d%%</string>
     <string name="title_activity_info">Info and FAQ</string>
     <string name="large_text">
         "Thank you for using our SmartEnergy App!\n\n"

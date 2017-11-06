@@ -262,13 +262,13 @@ public class Aktivitaet {
             } else {
                 // stands for car
                 this.transportationMode = 2;
-            };
+            }
             // calculate co2 again after response
             this.co2produced = calculateCo2();
         } catch (JSONException e){
             e.printStackTrace();
         }
-    };
+    }
 
     public long getDurationSeconds() {
         return durationInMillies;
