@@ -28,6 +28,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -212,7 +213,7 @@ public class UpdateService extends Service
         SharedPreferences sharedPrefs = getDefaultSharedPreferences(c);
         Gson gson = new Gson();
         String json = sharedPrefs.getString(Constants.UPDATE_STORE_TAG, null);
-        if (json == null || json == "") {
+        if (json == null || json == "" || Objects.equals(json, "")) {
             //this is the first time anyone has requested a list
             //just send an empty list
             return new ArrayList<Update>();

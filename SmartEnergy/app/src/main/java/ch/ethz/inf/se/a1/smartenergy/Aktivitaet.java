@@ -36,8 +36,6 @@ public class Aktivitaet {
     private double yellowCo2;
     private double energyUsed;
     private Context context;
-    private RequestQueue mQueue;
-    RequestQueue mRequestQueue;
     Location start;
     Location end;
     private int transportationMode;
@@ -131,14 +129,19 @@ public class Aktivitaet {
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatLoverCycling/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_AVERAGE:
                 result += Utils.averageCycling/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_NO_BEEF:
                 result += Utils.noBeefCycling/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_VEGAN:
                 result += Utils.veganCycling/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_VEGETARIAN:
                 result += Utils.vegetarianCycling/1000 * metersTravelled;
+                break;
             default:
                 result += Utils.averageCycling/1000 * metersTravelled;
         }
@@ -180,14 +183,19 @@ public class Aktivitaet {
         switch (lifestyle){
             case SettingsActivity.LIFESTYLE_MEAT_LOVER:
                 result += Utils.meatloverRunning/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_AVERAGE:
                 result += Utils.averageRunning/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_NO_BEEF:
                 result += Utils.noBeefRunning/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_VEGAN:
                 result += Utils.veganRunning/1000 * metersTravelled;
+                break;
             case SettingsActivity.LIFESTYLE_VEGETARIAN:
                 result += Utils.vegetarianRunning/1000 * metersTravelled;
+                break;
             default:
                 result += Utils.averageRunning/1000 * metersTravelled;
         }
@@ -254,13 +262,13 @@ public class Aktivitaet {
             } else {
                 // stands for car
                 this.transportationMode = 2;
-            };
+            }
             // calculate co2 again after response
             this.co2produced = calculateCo2();
         } catch (JSONException e){
             e.printStackTrace();
         }
-    };
+    }
 
     public long getDurationSeconds() {
         return durationInMillies;

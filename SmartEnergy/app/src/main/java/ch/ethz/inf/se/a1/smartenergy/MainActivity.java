@@ -18,14 +18,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -104,6 +100,14 @@ public class MainActivity extends AppCompatActivity
                 for (Day d : days) {
                 }
 
+                //add heating information
+                double heatingCo2 = calculateHeating();
+                mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
+                if (mHeatingCo2 != null) {
+                    mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
+                    // TODO add used energy for heating...
+                }
+
                 Snackbar.make(view, "Populating days... ", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
@@ -148,6 +152,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+
+        allUpdatesToDays();
+
+        //add heating information
+        double heatingCo2 = calculateHeating();
+        mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
+        if (mHeatingCo2 != null) {
+            mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
+            // TODO add used energy for heating...
+        }
 
         /*
         if (!canAccessLocation()) {
