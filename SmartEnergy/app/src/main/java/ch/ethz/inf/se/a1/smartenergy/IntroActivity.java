@@ -42,6 +42,7 @@ public class IntroActivity extends AppIntro2 {
 
         // Add intro slides
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.welcome), R.drawable.folder, getResources().getColor(R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.howItWorks), R.drawable.bars, getResources().getColor(R.color.violet)));
 //        addSlide(AppIntroFragment.newInstance("Smart Energy", getString(R.string.permission_storage), R.drawable.folder, getResources().getColor(R.color.orange))); // uncomment if storage permission is used later on
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_location), R.drawable.location, getResources().getColor(R.color.turkey)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_internet), R.drawable.ic_network_wifi_white_48dp, getResources().getColor(R.color.colorPrimary)));
@@ -55,9 +56,9 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.all_set), R.drawable.folder, Color.parseColor("#653BB5")));
 
         // Add permission request to the according slides
-//        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2); // uncomment if storage permission is used later on
-        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
-        askForPermissions(new String[]{Manifest.permission.INTERNET}, 3);
+//        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3); // uncomment if storage permission is used later on
+        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3);
+        askForPermissions(new String[]{Manifest.permission.INTERNET}, 4);
 
         showSkipButton(false); // intro has to be done
         setProgressButtonEnabled(true); // see how far you are in the intro
