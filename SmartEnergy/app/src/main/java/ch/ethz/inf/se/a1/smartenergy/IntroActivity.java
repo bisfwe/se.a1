@@ -15,6 +15,7 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import java.util.Set;
 
+import ch.ethz.inf.se.a1.smartenergy.introfragments.AllSet;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.CarUsage;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.HeatingType;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.HouseType;
@@ -53,7 +54,7 @@ public class IntroActivity extends AppIntro2 {
         addSlide(new LivingArea());
         addSlide(new HouseType());
         addSlide(new HeatingType());
-        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.all_set), R.drawable.folder, Color.parseColor("#653BB5")));
+        addSlide(new AllSet());
 
         // Add permission request to the according slides
 //        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3); // uncomment if storage permission is used later on

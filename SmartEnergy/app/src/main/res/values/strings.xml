@@ -16,7 +16,10 @@
     <string name="permission_internet">Giving you the most accurate transportation mode classifications, the app needs internet access.</string>
     <string name="going_settings">Now, we will go through a few settings on the next pages. You can also change them later by going to \"Settings\" or doing the tutorial again.</string>
     <string name="all_set">Thanks, everything is set up.</string>
-
+    <string name="moreInfo">More Info: </string>
+    <string name="moreInfoUrl"><a href="https://n.ethz.ch/~raphaeha/energy/report.pdf">Project Report</a></string>
+    <string name="contact">Contact: </string>
+    <string name="contactUrl"><a href="mailto:smartenergetic@gmail.com">Support Email</a></string>
 
     <!-- Category Transport -->
     <string name="pref_header_transport">Modes of Transport</string>
