@@ -87,11 +87,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                //TODO: place this somewhere better and update frequently
                 allUpdatesToDays();
                 adapter.notifyDataSetChanged();
-                for (Day d : days) {
-                }
 
                 //add heating information
                 double heatingCo2 = calculateHeating();
