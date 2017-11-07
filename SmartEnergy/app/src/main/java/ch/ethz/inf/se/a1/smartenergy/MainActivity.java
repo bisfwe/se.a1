@@ -75,10 +75,9 @@ public class MainActivity extends AppCompatActivity
         double heatingCo2 = calculateHeating();
         mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
         mHeatingCo2.setText("Carbon footprint: " + Double.valueOf(heatingCo2).intValue() + " kg");
-//        double heatingEnergy = calculateEnergy();
-//        mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
-//        mHeatingEnergy.setText("Energy footprint: " + );
-        // TODO add used energy for heating...
+        double heatingEnergy = calculateEnergy();
+        mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
+        mHeatingEnergy.setText("Energy footprint: " + Double.valueOf(heatingEnergy).intValue() + " kWh");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,10 +95,12 @@ public class MainActivity extends AppCompatActivity
 
                 //add heating information
                 double heatingCo2 = calculateHeating();
+                double heatingEnergy = calculateEnergy();
                 mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
                 if (mHeatingCo2 != null) {
                     mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
-                    // TODO add used energy for heating...
+                    mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
+                    mHeatingEnergy.setText("Energy footprint: " + Double.valueOf(heatingEnergy).intValue() + " kWh");
                 }
 
                 Snackbar.make(view, "Calculating your activities... ", Snackbar.LENGTH_SHORT)
@@ -151,10 +152,12 @@ public class MainActivity extends AppCompatActivity
 
         //add heating information
         double heatingCo2 = calculateHeating();
+        double heatingEnergy = calculateEnergy();
         mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
         if (mHeatingCo2 != null) {
             mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
-            // TODO add used energy for heating...
+            mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
+            mHeatingEnergy.setText("Energy footprint: " + Double.valueOf(heatingEnergy).intValue() + " kWh");
         }
 
         /*
@@ -275,36 +278,36 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    /**
-//     * calculate energy for heating per day
-//     * @return energy per day
-//     */
-//    private double calculateEnergy() {
-//        double result = 0.0;
-//        double heatingFactor;
-//
-//        SharedPreferences pref = getDefaultSharedPreferences(mContext);
-//        String heatingType = pref.getString(getString(R.string.pref_key_heating_type), Integer.toString(SettingsActivity.HOME_OIL));
-//
-//        switch (Integer.parseInt(heatingType)) {
-//            case SettingsActivity.HOME_GAS:
-//                heatingFactor = Utils.co2Gas;
-//                break;
-//            case SettingsActivity.HOME_ELECTRIC:
-//                heatingFactor = Utils.co2Electric;
-//                break;
-//            case SettingsActivity.HOME_AIR:
-//                heatingFactor = Utils.co2AirPump;
-//                break;
-//            case SettingsActivity.HOME_GROUND:
-//                heatingFactor = Utils.co2GroundPump;
-//                break;
-//            default:
-//                heatingFactor = Utils.co2Oil;
-//        }
-//
-//
-//    }
+    /**
+     * calculate energy for heating per day
+     * @return energy per day
+     */
+    private double calculateEnergy() {
+        double result = calculateHeating();
+        double heatingFactor;
+
+        SharedPreferences pref = getDefaultSharedPreferences(mContext);
+        String heatingType = pref.getString(getString(R.string.pref_key_heating_type), Integer.toString(SettingsActivity.HOME_OIL));
+
+        switch (Integer.parseInt(heatingType)) {
+            case SettingsActivity.HOME_GAS:
+                heatingFactor = Utils.co2Gas;
+                break;
+            case SettingsActivity.HOME_ELECTRIC:
+                heatingFactor = Utils.co2Electric;
+                break;
+            case SettingsActivity.HOME_AIR:
+                heatingFactor = Utils.co2AirPump;
+                break;
+            case SettingsActivity.HOME_GROUND:
+                heatingFactor = Utils.co2GroundPump;
+                break;
+            default:
+                heatingFactor = Utils.co2Oil;
+        }
+
+        return result / heatingFactor;
+    }
 
     // computes the heating stuff
     private double calculateHeating(){
