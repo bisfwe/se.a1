@@ -72,12 +72,7 @@ public class MainActivity extends AppCompatActivity
         mListView.setAdapter(adapter);
 
         //add heating information
-        double heatingCo2 = calculateHeating();
-        mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
-        mHeatingCo2.setText("Carbon footprint: " + Double.valueOf(heatingCo2).intValue() + " kg");
-        double heatingEnergy = calculateEnergy();
-        mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
-        mHeatingEnergy.setText("Energy footprint: " + Double.valueOf(heatingEnergy).intValue() + " kWh");
+        addHeatingInfo();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,14 +89,7 @@ public class MainActivity extends AppCompatActivity
                 }
 
                 //add heating information
-                double heatingCo2 = calculateHeating();
-                double heatingEnergy = calculateEnergy();
-                mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
-                if (mHeatingCo2 != null) {
-                    mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
-                    mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
-                    mHeatingEnergy.setText("Energy footprint: " + Double.valueOf(heatingEnergy).intValue() + " kWh");
-                }
+                addHeatingInfo();
 
                 Snackbar.make(view, "Calculating your activities... ", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
@@ -130,6 +118,19 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void addHeatingInfo() {
+        double heatingCo2 = calculateHeating();
+        mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
+        if (mHeatingCo2 != null) {
+            mHeatingCo2.setText("" + Double.valueOf(heatingCo2).intValue());
+        }
+        double heatingEnergy = calculateEnergy();
+        mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
+        if (mHeatingEnergy != null) {
+            mHeatingEnergy.setText("" + Double.valueOf(heatingEnergy).intValue());
+        }
+    }
+
     //method that asks the user for permission to turn on location
     //has to be checked everytime the app is created
     public void checkPermission() {
@@ -151,22 +152,7 @@ public class MainActivity extends AppCompatActivity
         allUpdatesToDays();
 
         //add heating information
-        double heatingCo2 = calculateHeating();
-        double heatingEnergy = calculateEnergy();
-        mHeatingCo2 = (TextView) findViewById(R.id.heating_co2);
-        if (mHeatingCo2 != null) {
-            mHeatingCo2.setText("Carbon emitted by heating: " + Double.valueOf(heatingCo2).intValue() + " kg");
-            mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
-            mHeatingEnergy.setText("Energy footprint: " + Double.valueOf(heatingEnergy).intValue() + " kWh");
-        }
-
-        /*
-        if (!canAccessLocation()) {
-            requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-        }
-
-        */
-
+        addHeatingInfo();
     }
 
     @Override
