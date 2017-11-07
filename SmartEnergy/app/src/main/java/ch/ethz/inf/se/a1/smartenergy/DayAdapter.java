@@ -73,7 +73,7 @@ public class DayAdapter extends BaseAdapter {
 
         titleTextView.setText(dayOfWeekName);
         subtitleTextView.setText("Carbon footprint: " + Double.valueOf(day.getTotalCo2()).intValue() + " kg");
-        subEnergyTextView.setText("Energy used: " + Double.valueOf(day.getTotalEnergy()).intValue() + " kW/h");
+        subEnergyTextView.setText("Energy used: " + Double.valueOf(day.getTotalEnergy()).intValue() + " kWh");
 
         GraphView graph = (GraphView) rowView.findViewById(R.id.graph);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
