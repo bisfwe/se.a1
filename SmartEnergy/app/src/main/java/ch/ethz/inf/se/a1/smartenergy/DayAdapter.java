@@ -19,6 +19,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -72,8 +73,9 @@ public class DayAdapter extends BaseAdapter {
         String dayOfWeekName = formatter.print( dateTime );
 
         titleTextView.setText(dayOfWeekName);
+        DecimalFormat df = new DecimalFormat("#0.000");
         subtitleTextView.setText(Double.valueOf(day.getTotalCo2()).intValue() + "");
-        subEnergyTextView.setText("" + Double.valueOf(day.getTotalEnergy()).intValue());
+        subEnergyTextView.setText("" + df.format(day.getTotalEnergy()));
 
         GraphView graph = (GraphView) rowView.findViewById(R.id.graph);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {

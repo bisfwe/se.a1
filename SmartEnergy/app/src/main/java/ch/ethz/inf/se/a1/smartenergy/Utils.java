@@ -60,23 +60,23 @@ public class Utils {
 
     static double meatLoverWalking = 29.91984799;
     static double meatLoverCycling = 74.79961998;
-    static double meatloverRunning = 99.30920419;
+    static double meatloverRunning = 269.2786319;
 
     static double averageWalking = 22.66655151;
     static double averageCycling = 56.66637877;
-    static double averageRunning = 75.2342456;
+    static double averageRunning = 203.9989636;
 
     static double noBeefWalking = 17.22657915;
     static double noBeefCycling = 43.06644787;
-    static double noBeefRunning = 57.17802666;
+    static double noBeefRunning = 155.0392123;
 
     static double vegetarianWalking = 15.41325503;
     static double vegetarianCycling = 38.53313756;
-    static double vegetarianRunning = 51.15928701;
+    static double vegetarianRunning = 138.7192952;
 
     static double veganWalking = 13.59993091;
     static double veganCycling = 33.99982726;
-    static double veganRunning = 45.14054736;
+    static double veganRunning = 122.3993781;
 
     static double co2Tramway = 1.16509434;
     static double co2Petrol = 2336.238005;
@@ -88,7 +88,7 @@ public class Utils {
 
     static double energyWalking = 0.01;
     static double energyCycling = 0.025;
-    static double energyRunning = 0.032;
+    static double energyRunning = 0.09;
 
     static double energyTram = 0.089622642;
     static double energyPetrol = 9.602229904;
