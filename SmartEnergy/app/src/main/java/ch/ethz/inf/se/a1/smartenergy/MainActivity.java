@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -124,7 +125,8 @@ public class MainActivity extends AppCompatActivity
         double heatingEnergy = calculateEnergy();
         mHeatingEnergy = (TextView) findViewById(R.id.heating_energy);
         if (mHeatingEnergy != null) {
-            mHeatingEnergy.setText("" + Double.valueOf(heatingEnergy).intValue());
+            DecimalFormat df = new DecimalFormat("#0.000");
+            mHeatingEnergy.setText(df.format(heatingEnergy));
         }
     }
 
