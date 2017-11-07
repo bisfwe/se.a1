@@ -81,7 +81,7 @@ public class Aktivitaet {
     private double determineTransportation(){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         Set<String> selections = pref.getStringSet(context.getString(R.string.pref_key_used_transportation), null);
-        if (selections.size() <= 0){
+        if (selections == null || selections.size() <= 0){
             return 0.0;
         }
         // collections contains car and tram or train, we use the transport api to determine which of them it is..

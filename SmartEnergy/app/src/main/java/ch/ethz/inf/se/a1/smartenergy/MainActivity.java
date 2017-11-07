@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity
             Manifest.permission.ACCESS_FINE_LOCATION,
     };
     private static final int INITIAL_REQUEST=1337;
-    private static final boolean dummyData = false;
 
     private Context mContext;
     private ListView mListView;
@@ -51,15 +50,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         mContext = this;
-        // TODO remove this shit ;)
-        if (dummyData){
-            SharedPreferences sharedPrefs = getDefaultSharedPreferences(mContext);
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-
-            //save it forever
-            editor.putString(Constants.UPDATE_STORE_TAG, "[{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.381692,\"longitude\":8.571583,\"timeInMillies\":1509550903896},{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.376618,\"longitude\":8.548713,\"timeInMillies\":1509551683000},{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.372726,\"longitude\":8.601083,\"timeInMillies\":1509616843000},{\"accuracy\":80.0,\"activityType\":0,\"altitude\":526.7999877929688,\"latitude\":47.337563,\"longitude\":8.673575,\"timeInMillies\":1509618960000}]");
-            editor.commit();
-        }
 
         // Show intro the very first time the app is opened
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -112,7 +102,7 @@ public class MainActivity extends AppCompatActivity
                     // TODO add used energy for heating...
                 }
 
-                Snackbar.make(view, "Populating days... ", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "Calculating your activities... ", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
