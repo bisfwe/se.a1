@@ -75,7 +75,7 @@ public class DayAdapter extends BaseAdapter {
         titleTextView.setText(dayOfWeekName);
         DecimalFormat df = new DecimalFormat("#0.000");
         subtitleTextView.setText(Double.valueOf(day.getTotalCo2()).intValue() + "");
-        subEnergyTextView.setText("" + df.format(day.getTotalEnergy()));
+        subEnergyTextView.setText(df.format(day.getTotalEnergy()));
 
         GraphView graph = (GraphView) rowView.findViewById(R.id.graph);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
