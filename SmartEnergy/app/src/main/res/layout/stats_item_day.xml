@@ -13,6 +13,7 @@
         android:layout_marginBottom="5sp"
         android:layout_marginTop="10sp"
         android:fontFamily="@font/amiko"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:text="Title" />
@@ -38,6 +39,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="5sp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
@@ -49,7 +51,7 @@
         android:layout_width="150dp"
         android:layout_height="80dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignTop="@+id/day_list_title" />
 
 
 </RelativeLayout>

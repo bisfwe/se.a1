@@ -25,6 +25,7 @@
         android:layout_marginBottom="5sp"
         android:layout_marginTop="25sp"
         android:fontFamily="@font/amiko"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="Heating"
