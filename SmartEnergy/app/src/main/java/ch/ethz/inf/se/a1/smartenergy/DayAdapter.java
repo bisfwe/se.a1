@@ -51,6 +51,7 @@ public class DayAdapter extends BaseAdapter {
         return position;
     }
 
+    // populates the list view with content
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get view for row item

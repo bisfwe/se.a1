@@ -77,7 +77,6 @@ public class Aktivitaet {
         }
         return result;
     }
-    // TODO calculate co2 for planes (activity probably unknown but mean speed rather high
 
     private double determineTransportation(){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -122,6 +121,7 @@ public class Aktivitaet {
         return 0.0;
     }
 
+    // calculate co2 for bycicle aktivitaet
     private double co2Bicycle(){
         double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -149,6 +149,7 @@ public class Aktivitaet {
         energyUsed = (metersTravelled/1000) * Utils.energyCycling;
         return result;
     }
+    //calculates co2 for walking aktivitaet
     private double co2Walking(){
         double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -175,7 +176,7 @@ public class Aktivitaet {
         energyUsed = (metersTravelled/1000) * Utils.energyWalking;
         return result;
     }
-
+    // calculates co2 for running aktivitaet
     private double co2Running(){
         double result = 0.0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -204,6 +205,7 @@ public class Aktivitaet {
         return result;
     }
 
+    // calculates co2 for tram/public transport
     private double co2Tram(){
         double result = metersTravelled/1000 * Utils.co2Tramway;
         yellowCo2 += result;
@@ -211,6 +213,7 @@ public class Aktivitaet {
         return result;
     }
 
+    //calculates co2 for driving car aktivitaet
     private double co2Car(){
         double result;
         double energy;
@@ -253,6 +256,7 @@ public class Aktivitaet {
         return result;
     }
 
+    // handles response of swiss public transport api
     private void handleResponse(JSONObject response){
         try {
             JSONObject station = response.getJSONArray("stations").getJSONObject(0);
@@ -270,15 +274,6 @@ public class Aktivitaet {
         }
     };
 
-    public long getDurationSeconds() {
-        return durationInMillies;
-    }
-    public float getMetersTravelled() {
-        return metersTravelled;
-    }
-    public int getDetectedActivityType(){
-        return detectedActivityType;
-    }
     public double getCo2produced() {
         return co2produced;
     }
