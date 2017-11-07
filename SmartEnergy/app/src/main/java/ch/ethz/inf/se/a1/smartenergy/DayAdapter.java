@@ -64,7 +64,7 @@ public class DayAdapter extends BaseAdapter {
         TextView subtitleTextView = (TextView) rowView.findViewById(R.id.day_list_subtitle);
         TextView subEnergyTextView = (TextView) rowView.findViewById(R.id.day_list_subEnergy);
 
-        Day day = (Day) getItem(position);
+        Day day = getItem(position);
         DateTimeZone timeZone = DateTimeZone.forID( "Europe/Paris" );
         DateTime dateTime = new DateTime( day.date, timeZone );
         int dayOfWeekNumber = dateTime.getDayOfWeek(); // ISO 8601 standard says Monday is 1.

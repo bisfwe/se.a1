@@ -15,6 +15,7 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import java.util.Set;
 
+import ch.ethz.inf.se.a1.smartenergy.introfragments.AllSet;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.CarUsage;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.HeatingType;
 import ch.ethz.inf.se.a1.smartenergy.introfragments.HouseType;
@@ -43,7 +44,6 @@ public class IntroActivity extends AppIntro2 {
         // Add intro slides
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.welcome), R.drawable.folder, getResources().getColor(R.color.colorPrimary)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.howItWorks), R.drawable.bars, getResources().getColor(R.color.violet)));
-//        addSlide(AppIntroFragment.newInstance("Smart Energy", getString(R.string.permission_storage), R.drawable.folder, getResources().getColor(R.color.orange))); // uncomment if storage permission is used later on
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_location), R.drawable.location, getResources().getColor(R.color.turkey)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_internet), R.drawable.ic_network_wifi_white_48dp, getResources().getColor(R.color.colorPrimary)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.going_settings), R.drawable.ic_settings_white_48dp, getResources().getColor(R.color.violet)));
@@ -53,10 +53,9 @@ public class IntroActivity extends AppIntro2 {
         addSlide(new LivingArea());
         addSlide(new HouseType());
         addSlide(new HeatingType());
-        addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.all_set), R.drawable.folder, Color.parseColor("#653BB5")));
+        addSlide(new AllSet());
 
         // Add permission request to the according slides
-//        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3); // uncomment if storage permission is used later on
         askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3);
         askForPermissions(new String[]{Manifest.permission.INTERNET}, 4);
 
@@ -90,21 +89,33 @@ public class IntroActivity extends AppIntro2 {
         Log.i(TAG, "slide change");
 
         // skip car usage slide if the user does not drive cars
-        if (newFragment != null && newFragment.toString().startsWith(CarUsage.class.getName().substring(45))) {
-            // car usage slide is accessed
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-            Set transportationModes = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
+        try {
+            if (newFragment != null && newFragment.toString().startsWith(CarUsage.class.getName().substring(45))) {
+                // car usage slide is accessed
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+                Set transportationModes = pref.getStringSet(getString(R.string.pref_key_used_transportation), null);
 
-            if (transportationModes != null && !transportationModes.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
-                // the user is not driving cars
-                if (oldFragment.toString().startsWith(TransportationModes.class.getName().substring(45))) {
-                    // coming from left
-                    ((ViewGroup) getSlides().get(5).getView().getParent().getParent()).findViewById(R.id.next).performClick();
-                } else if (oldFragment.toString().startsWith(Lifestyle.class.getName().substring(45))) {
-                    // coming from right
-                    onBackPressed();
+                if (transportationModes != null && !transportationModes.toString().contains(Integer.toString(TRANSPORTATION_CAR))) {
+                    // the user is not driving cars
+                    if (oldFragment.toString().startsWith(TransportationModes.class.getName().substring(45))) {
+                        // coming from left
+                        ((ViewGroup) getSlides().get(5).getView().getParent().getParent()).findViewById(R.id.next).performClick();
+                    } else if (oldFragment.toString().startsWith(Lifestyle.class.getName().substring(45))) {
+                        // coming from right
+                        onBackPressed();
+                    }
                 }
             }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage()); // can happen if the user turns the screen exactly before this code is executed
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do not allow to go back on the first intro slides, intro should be done
+        if (getSlides().get(0).getView() == null) {
+            super.onBackPressed();
         }
     }
 }
