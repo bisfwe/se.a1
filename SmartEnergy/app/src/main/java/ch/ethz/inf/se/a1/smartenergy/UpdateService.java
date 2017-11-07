@@ -256,7 +256,6 @@ public class UpdateService extends Service
         final Date currentTime = Calendar.getInstance().getTime();
         Log.e(TAG, "currentTime: " + currentTime);
 
-        //TODO: somehow these activities always return STILL with 100% confidence
         ArrayList<DetectedActivity> detectedActivities = Utils.detectedActivitiesFromJson(
                 getDefaultSharedPreferences(getApplicationContext())
                         .getString(Constants.KEY_DETECTED_ACTIVITIES, ""));
