@@ -83,6 +83,7 @@ public class DayAdapter extends BaseAdapter {
                 new DataPoint(1, day.getTotalYellowCo2()),
                 new DataPoint(2, day.getTotalRedCo2()),
         });
+//        series.setDataWidth(0.5);
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint data) {
@@ -105,6 +106,9 @@ public class DayAdapter extends BaseAdapter {
         grid.setVerticalLabelsVisible(false);
         grid.setHighlightZeroLines(false);
         graph.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.NONE );
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(-0.5);
+        graph.getViewport().setMaxX(2.5);
 
         return rowView;
     }
