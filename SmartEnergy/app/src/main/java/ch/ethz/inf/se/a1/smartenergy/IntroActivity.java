@@ -1,14 +1,17 @@
 package ch.ethz.inf.se.a1.smartenergy;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
@@ -46,6 +49,7 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.howItWorks), R.drawable.bars, getResources().getColor(R.color.violet)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_location), R.drawable.location, getResources().getColor(R.color.turkey)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.permission_internet), R.drawable.ic_network_wifi_white_48dp, getResources().getColor(R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance("No Internet Detected!", "Please insert a SIM card. Without an active Internet connection, the app will not work.", R.drawable.ic_sim_card_alert_white_48dp, getResources().getColor(R.color.turkey)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.app_name), getString(R.string.going_settings), R.drawable.ic_settings_white_48dp, getResources().getColor(R.color.violet)));
         addSlide(new TransportationModes());
         addSlide(new CarUsage());
@@ -83,6 +87,8 @@ public class IntroActivity extends AppIntro2 {
         super.onSkipPressed(currentFragment);
     }
 
+    private boolean simChecked = false;
+
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
@@ -99,11 +105,29 @@ public class IntroActivity extends AppIntro2 {
                     // the user is not driving cars
                     if (oldFragment.toString().startsWith(TransportationModes.class.getName().substring(45))) {
                         // coming from left
-                        ((ViewGroup) getSlides().get(5).getView().getParent().getParent()).findViewById(R.id.next).performClick();
+                        ((ViewGroup) getSlides().get(6).getView().getParent().getParent()).findViewById(R.id.next).performClick();
                     } else if (oldFragment.toString().startsWith(Lifestyle.class.getName().substring(45))) {
                         // coming from right
                         onBackPressed();
                     }
+                }
+            }
+
+            if (!simChecked && ((ViewGroup) getSlides().get(5).getView()) != null) {
+                TelephonyManager telMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                int simState = telMgr.getSimState();
+                simChecked = true;
+                switch (simState) {
+                    case TelephonyManager.SIM_STATE_ABSENT:
+                    case TelephonyManager.SIM_STATE_NETWORK_LOCKED:
+                    case TelephonyManager.SIM_STATE_PIN_REQUIRED:
+                    case TelephonyManager.SIM_STATE_PUK_REQUIRED:
+                    case TelephonyManager.SIM_STATE_UNKNOWN:
+                    default:
+                        break;
+                    case TelephonyManager.SIM_STATE_READY:
+                        ((ViewGroup) getSlides().get(4).getView().getParent().getParent()).findViewById(R.id.next).performClick();
+                        break;
                 }
             }
         } catch (Exception e) {
