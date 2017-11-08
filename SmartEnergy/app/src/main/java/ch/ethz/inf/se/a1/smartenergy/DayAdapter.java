@@ -83,7 +83,6 @@ public class DayAdapter extends BaseAdapter {
                 new DataPoint(1, day.getTotalYellowCo2()),
                 new DataPoint(2, day.getTotalRedCo2()),
         });
-//        series.setDataWidth(0.5);
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint data) {
